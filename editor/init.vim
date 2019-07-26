@@ -9,6 +9,10 @@ Plug 'w0rp/ale'                         " check syntax and lint
 Plug 'itchyny/lightline.vim'            " improved status line
 Plug 'machakann/vim-highlightedyank'    " highlight lines while yanking
 
+" Editor enhancements
+Plug 'scrooloose/nerdtree'              " File browser
+Plug 'tpope/vim-unimpaired'             " move lines of code around using alt+j/k
+
 " Semantic language support
 Plug 'ncm2/ncm2'                        " autocompletion
 Plug 'roxma/nvim-yarp'                  " remote plugin framework required by ncm2
@@ -19,12 +23,6 @@ Plug 'ncm2/ncm2-bufword'                " autocomplete words from current buffer
 Plug 'ncm2/ncm2-path'                   " filepath completion
 Plug 'jiangmiao/auto-pairs'             " auto close parens, braces and brackets
 Plug 'scrooloose/nerdcommenter'         " easy commenting of code
-
-" File browser
-Plug 'scrooloose/nerdtree'
-
-" Move code
-Plug 'tpope/vim-unimpaired'             " move lines of code around using alt+j/k
 
 " Syntactic language support
 Plug 'rust-lang/rust.vim'
@@ -53,7 +51,6 @@ let g:ale_rust_rls_config = {
         \ 'clippy_preference': 'on'
     \ }
 \ }
-" let g:ale_completion_enabled = 1
 let g:ale_rust_rls_toolchain = 'stable'
 let g:ale_linters = {'rust': ['rls']}
 highlight link ALEWarningSign Todo
@@ -94,6 +91,7 @@ set expandtab                           " expand tabs to space
 
 " GUI settings
 syntax on                               " syntax highlighting
+set synmaxcol=500                       " no syntax highlight on long lines for perf.
 colorscheme onedark                     " onedark color scheme
 set ttyfast                             " indicate a fast terminal connection
 set lazyredraw                          " reduce updates while not typing
@@ -155,5 +153,5 @@ map L $
 " Quick save
 nmap <leader>w :w<CR>
 
-" Clipboard
+" TODO: Clipboard
 
