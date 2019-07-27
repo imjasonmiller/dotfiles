@@ -1,3 +1,5 @@
+set shell=/bin/bash
+
 " Plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -5,7 +7,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'joshdick/onedark.vim'             " one dark theme
 
 " Gui enhancements
-Plug 'w0rp/ale'                         " check syntax and lint
 Plug 'itchyny/lightline.vim'            " improved status line
 Plug 'machakann/vim-highlightedyank'    " highlight lines while yanking
 
@@ -14,20 +15,18 @@ Plug 'scrooloose/nerdtree'              " File browser
 Plug 'tpope/vim-unimpaired'             " move lines of code around using alt+j/k
 
 " Semantic language support
-Plug 'ncm2/ncm2'                        " autocompletion
-Plug 'roxma/nvim-yarp'                  " remote plugin framework required by ncm2
 Plug 'airblade/vim-gitgutter'           " show git changes in the sign column
 
 " Completion plugins
-Plug 'ncm2/ncm2-bufword'                " autocomplete words from current buffer
-Plug 'ncm2/ncm2-path'                   " filepath completion
+Plug 'neoclide/coc.nvim', { 
+    \ 'branch': 'release'
+    \ }                                 " intellisense engine for vim8/neovim
 Plug 'jiangmiao/auto-pairs'             " auto close parens, braces and brackets
-Plug 'scrooloose/nerdcommenter'         " easy commenting of code
+Plug 'scrooloose/nerdcommenter'         " improve commenting of code
 
 " Syntactic language support
-Plug 'rust-lang/rust.vim'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'rust-lang/rust.vim'               " Rust
+Plug 'HerringtonDarkholme/yats.vim'     " TypeScript
 
 call plug#end()
 
@@ -38,41 +37,11 @@ if has('nvim')
     noremap <C-q> :confirm qall<CR>
 end
 
-" Linter (only on save)
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_save = 0
-let g:ale_lint_on_enter = 0
-let g:ale_virtualtext_cursor = 1
-let g:ale_rust_rls_config = {
-    \ 'rust': {
-        \ 'all_targets': 1,
-        \ 'build_on_save': 1,
-        \ 'clippy_preference': 'on'
-    \ }
-\ }
-let g:ale_rust_rls_toolchain = 'stable'
-let g:ale_linters = {'rust': ['rls']}
-highlight link ALEWarningSign Todo
-highlight link ALEErrorSign WarningMsg
-highlight link ALEVirtualTextWarning Todo
-highlight link ALEVirtualTextInfo Todo
-highlight link ALEVirtualTextError WarningMsg
-highlight ALEError guibg=none
-highlight ALEWarning guibg=none
-let g:ale_sign_warning = "●"
-let g:ale_sign_error = "●"
-let g:ale_sign_info = "●"
-let g:ale_sign_hint = "●"
-
-nnoremap <silent> K :ALEHover<CR>
-nnoremap <silent> gd :ALEGoToDefinition<CR>
+" Autocomplete and plugins
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-css', 'coc-rls' ]
+set completeopt=noinsert,menuone,noselect
 
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
-
-" Autocomplete
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
 
 " Do not hijack the Enter key
 inoremap <expr><Tab> (pumvisible() ? (empty(v:completed_item) ? "\<C-n>":"\<C-y>"):"\<Tab>")
@@ -100,6 +69,12 @@ set cursorline                          " highlight the current line
 hi normal guibg=none ctermbg=none       " transparent background
 set shortmess+=c                        " suppress 'match x of y' messages
 
+" Change highlight colors for coc
+hi CocErrorSign     guifg=#E06C75
+hi CocWarningSign   guifg=#E5C07B
+hi CocInfoSign      guifg=#61AFEF
+hi CocHintSign      guifg=#98C379
+
 " Lightline
 set noshowmode                          " hide insert status
 let g:lightline = {
@@ -119,6 +94,9 @@ let mapleader = ","
 
 " Toggle nerdtree
 nnoremap <leader>a :NERDTreeToggle<Cr>
+
+" Go to definition
+nmap <silent> gd <Plug>(coc-definition)
 
 " Ctrl+c and Ctrl+j as Esc
 inoremap <C-j> <Esc>
@@ -154,4 +132,3 @@ map L $
 nmap <leader>w :w<CR>
 
 " TODO: Clipboard
-
