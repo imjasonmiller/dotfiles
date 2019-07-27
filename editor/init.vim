@@ -88,6 +88,11 @@ if (empty($TMUX))
     endif
 endif
 
+" Avoid backups
+set nowritebackup
+set noswapfile
+set nobackup
+
 " Keyboard shortcuts
 " Remap leader key to ,
 let mapleader = ","
