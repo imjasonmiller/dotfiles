@@ -1,6 +1,12 @@
 {
-   "diagnostic.errorSign": "●",
-   "diagnostic.warningSign": "●",
-   "diagnostic.infoSign": "●",
-   "diagnostic.hintSign": "●"
+    "eslint.filetypes": [
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "javascriptreact"
+    ],
+    "diagnostic.errorSign": "●",
+    "diagnostic.warningSign": "●",
+    "diagnostic.infoSign": "●",
+    "diagnostic.hintSign": "●"
 }
