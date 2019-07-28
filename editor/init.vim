@@ -125,7 +125,7 @@ nmap <A-k> ]e
 vmap <A-j> [egv
 vmap <A-k> ]egv
 
-" Vertical movement by screen lines
+" Improve hjkl-movement for soft wrapped rows
 nnoremap j gj
 nnoremap k gk
 
