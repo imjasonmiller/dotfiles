@@ -2,7 +2,11 @@
 
 ## Install
 
-* A plugin manager is required. The `init.vim` in this directory is set up to use [`vim-plug`](https://github.com/junegunn/vim-plug). Plugins can then be installed with `:PlugInstall`.
+### Required
+* A plugin manager. The `init.vim` in this directory is set up to use [`vim-plug`](https://github.com/junegunn/vim-plug). Plugins can then be installed with `:PlugInstall`.
+
+### Optional
+* [Fira Code](https://github.com/tonsky/FiraCode) font with ligature support.
 
 ## Features
 * Autocomplete Rust, TypeScript, JavaScript and CSS using [`coc.nvim`](https://github.com/neoclide/coc.nvim)
