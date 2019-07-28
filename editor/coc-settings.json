@@ -5,6 +5,15 @@
         "typescriptreact",
         "javascriptreact"
     ],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css", 
+        "javascript", 
+        "typescript", 
+        "html",
+        "scss"
+    ],
+    "prettier.tabWidth": 4,
+    "prettier.trailingComma": "es5",
     "diagnostic.errorSign": "●",
     "diagnostic.warningSign": "●",
     "diagnostic.infoSign": "●",

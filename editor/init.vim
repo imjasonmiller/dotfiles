@@ -38,7 +38,13 @@ if has('nvim')
 end
 
 " Autocomplete and plugins
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-css', 'coc-rls', 'coc-eslint' ]
+let g:coc_global_extensions = [
+    \ 'coc-tsserver',
+    \ 'coc-css',
+    \ 'coc-rls',
+    \ 'coc-eslint',
+    \ 'coc-prettier'
+    \ ]
 set completeopt=noinsert,menuone,noselect
 
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
