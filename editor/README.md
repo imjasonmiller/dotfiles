@@ -7,7 +7,7 @@
 ## Features
 * Autocomplete Rust, TypeScript, JavaScript and CSS using [`coc.nvim`](https://github.com/neoclide/coc.nvim)
 * Linting for TypeScript and JavaScript using [`eslint`](https://github.com/eslint/eslint) and [`@typescript-eslint/parser`](https://github.com/typescript-eslint/typescript-eslint).
-* Format TypeScript, JavaScript, CSS, SCSS and Less on save using (`prettier`)[https://github.com/prettier/prettier].
+* Format TypeScript, JavaScript, CSS, SCSS and Less on save using [`prettier`](https://github.com/prettier/prettier).
 
 ## Preview
 ![Screenshot of editor](./../images/editor_nvim.jpg)
