@@ -30,13 +30,6 @@ Plug 'HerringtonDarkholme/yats.vim'     " TypeScript
 
 call plug#end()
 
-" Change cursor and add incremental commands
-if has('nvim')
-    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-    set inccommand=nosplit
-    noremap <C-q> :confirm qall<CR>
-end
-
 " Autocomplete and plugins
 let g:coc_global_extensions = [
     \ 'coc-tsserver',
@@ -72,8 +65,17 @@ set ttyfast                             " indicate a fast terminal connection
 set lazyredraw                          " reduce updates while not typing
 set laststatus=2                        " always show the status line
 set cursorline                          " highlight the current line
+set background=dark
 hi normal guibg=none ctermbg=none       " transparent background
 set shortmess+=c                        " suppress 'match x of y' messages
+
+" Change cursor and add incremental commands
+if has('nvim')
+    " hi Cursor guifg=black guibg=green gui=reverse
+    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+    set inccommand=nosplit
+    noremap <C-q> :confirm qall<CR>
+end
 
 " Change highlight colors for coc
 hi CocErrorSign     guifg=#E06C75
@@ -124,12 +126,12 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 
 " Move single selected line
-nmap <A-j> [e
-nmap <A-k> ]e
+nmap <A-j> ]e
+nmap <A-k> [e
 
 " Move multiple selected lines
-vmap <A-j> [egv
-vmap <A-k> ]egv
+vmap <A-j> ]egv
+vmap <A-k> [egv
 
 " Improve hjkl-movement for soft wrapped rows
 nnoremap j gj
