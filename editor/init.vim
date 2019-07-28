@@ -11,7 +11,7 @@ Plug 'itchyny/lightline.vim'            " improved status line
 Plug 'machakann/vim-highlightedyank'    " highlight lines while yanking
 
 " Editor enhancements
-Plug 'scrooloose/nerdtree'              " File browser
+Plug 'scrooloose/nerdtree'              " file browser
 Plug 'tpope/vim-unimpaired'             " move lines of code around using alt+j/k
 
 " Semantic language support
@@ -54,9 +54,9 @@ set encoding=utf-8                      " enable utf-8 encoding
 set scrolloff=2                         " minimum lines to keep above and below cursor
 
 " Default indentation
-set shiftwidth=4                        " 
+set shiftwidth=4                        " spaces to auto-indent 
 set tabstop=4                           " tab width of 4 spaces
-set expandtab                           " expand tabs to space
+set expandtab                           " expand tabs to spaces
 
 " GUI settings
 syntax on                               " syntax highlighting
@@ -103,7 +103,7 @@ nnoremap <leader>a :NERDTreeToggle<Cr>
 " Go to definition
 nmap <silent> gd <Plug>(coc-definition)
 
-" Ctrl+c and Ctrl+j as Esc
+" Map Ctrl+c and Ctrl+j as Esc
 inoremap <C-j> <Esc>
 vnoremap <C-j> <Esc>
 inoremap <C-c> <Esc>
@@ -117,11 +117,11 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-" Move single lines
+" Move single selected line
 nmap <A-j> [e
 nmap <A-k> ]e
 
-" Move multiple lines selected
+" Move multiple selected lines
 vmap <A-j> [egv
 vmap <A-k> ]egv
 
