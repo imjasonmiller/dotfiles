@@ -15,5 +15,5 @@
 * In normal and visual mode, move selected lines up and down with `<A-k>` and `<A-j>` respectively.
 
 ## Preview
-![Screenshot of editor](./../images/editor_nvim.jpg)
+![Screenshot of editor](./../../images/editor_nvim.jpg)
 
