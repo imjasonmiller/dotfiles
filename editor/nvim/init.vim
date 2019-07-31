@@ -11,6 +11,7 @@ Plug 'itchyny/lightline.vim'            " improved status line
 Plug 'machakann/vim-highlightedyank'    " highlight lines while yanking
 
 " Editor enhancements
+Plug 'editorconfig/editorconfig-vim'    " consistent code style across editors
 Plug 'scrooloose/nerdtree'              " file browser
 Plug 'tpope/vim-unimpaired'             " move lines of code around using alt+j/k
 
