@@ -28,6 +28,7 @@ Plug 'scrooloose/nerdcommenter'         " improve commenting of code
 " Syntactic language support
 Plug 'rust-lang/rust.vim'               " Rust
 Plug 'HerringtonDarkholme/yats.vim'     " TypeScript
+Plug 'cespare/vim-toml'                 " TOML
 
 call plug#end()
 
