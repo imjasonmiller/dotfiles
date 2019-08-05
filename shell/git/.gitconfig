@@ -1,0 +1,20 @@
+[user]
+    email = contact@jasonmiller.nl
+    name = Jason Miller
+    signingkey = 11DED1289B3C3ABF76CA8E90A301544D2EEEFDFC
+[core]
+    autocrlf = input
+    safecrlf = true
+    editor = nvim
+[difftool "nvim-diff"]
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
+[diff]
+    tool = nvim-diff
+[mergetool "nvim-merge"]
+	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
+[merge]
+    tool = nvim-merge
+[commit]
+    gpgsign = true
+[protocol]
+    version = 2
