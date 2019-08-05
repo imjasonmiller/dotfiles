@@ -11,7 +11,7 @@
 [diff]
     tool = nvim-diff
 [mergetool "nvim-merge"]
-	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
 [merge]
     tool = nvim-merge
 [commit]
