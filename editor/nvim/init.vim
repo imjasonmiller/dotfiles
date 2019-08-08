@@ -98,6 +98,9 @@ if (empty($TMUX))
     endif
 endif
 
+" Treat .svelte files as html
+au! BufNewFile,BufRead *.svelte set ft=html
+
 " Avoid backups
 set nowritebackup
 set noswapfile
