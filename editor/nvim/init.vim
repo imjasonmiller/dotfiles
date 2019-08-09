@@ -19,7 +19,7 @@ Plug 'tpope/vim-unimpaired'             " move lines of code around using alt+j/
 Plug 'airblade/vim-gitgutter'           " show git changes in the sign column
 
 " Completion plugins
-Plug 'neoclide/coc.nvim', { 
+Plug 'neoclide/coc.nvim', {
     \ 'branch': 'release'
     \ }                                 " intellisense engine for vim8/neovim
 Plug 'jiangmiao/auto-pairs'             " auto close parens, braces and brackets
@@ -53,9 +53,8 @@ filetype plugin indent on               " file type detection
 set autoindent                          " auto-indent each line
 set encoding=utf-8                      " enable utf-8 encoding
 set scrolloff=2                         " minimum lines to keep above and below cursor
-
 " Default indentation
-set shiftwidth=4                        " spaces to auto-indent 
+set shiftwidth=4                        " spaces to auto-indent
 set tabstop=4                           " tab width of 4 spaces
 set expandtab                           " expand tabs to spaces
 
@@ -70,6 +69,15 @@ set cursorline                          " highlight the current line
 set background=dark
 hi normal guibg=none ctermbg=none       " transparent background
 set shortmess+=c                        " suppress 'match x of y' messages
+
+" Show and highlight invisible characters
+set nolist                              " hide by default, as they are toggled
+set listchars=""                        " characters that will be shown
+set listchars+=extends:»
+set listchars+=precedes:«
+set listchars+=nbsp:¬                   " non-breaking space
+set listchars+=trail:•                  " trailing whitespace
+hi WhiteSpace guifg=#C678DD             " purple color for characters
 
 " Change cursor and add incremental commands
 if has('nvim')
@@ -115,6 +123,9 @@ let mapleader = ","
 
 " Toggle nerdtree
 nnoremap <leader>a :NERDTreeToggle<Cr>
+
+" Toggle invisible characters
+nnoremap <leader>t :set invlist<Cr>
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
