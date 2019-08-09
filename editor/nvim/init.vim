@@ -113,8 +113,14 @@ let mapleader = ","
 " Toggle nerdtree
 nnoremap <leader>a :NERDTreeToggle<Cr>
 
-" Go to definition
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for coc gotos
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
 
 " Map Ctrl+c and Ctrl+j as Esc
 inoremap <C-j> <Esc>
