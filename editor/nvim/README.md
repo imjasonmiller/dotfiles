@@ -7,7 +7,7 @@
 * A plugin manager. The `init.vim` in this directory is set up to use [`vim-plug`](https://github.com/junegunn/vim-plug). Plugins can then be installed with `:PlugInstall`.
 
 ### Optional
-* [Fira Code](https://github.com/tonsky/FiraCode) font with ligature support. 
+* [Fira Code](https://github.com/tonsky/FiraCode) font with ligature support.
 
 ## Features
 * Autocomplete in Rust, TypeScript, JavaScript and CSS using [`coc.nvim`](https://github.com/neoclide/coc.nvim).
@@ -24,7 +24,7 @@ In normal and visual mode, the cursor can be moved to the start or end of line w
 In normal and visual mode, the current or selected line(s) can be moved up or down with <kbd>alt</kbd> + <kbd>k</kbd> and <kbd>alt</kbd> + <kbd>j</kbd> respectively.
 
 **Comment and uncomment line(s)**  
-In normal and visual mode, the current or selected line(s) can be commented and uncommented with <kbd>leader</kbd> + <kbd>c</kbd> + <kbd>space</kbd>. 
+In normal and visual mode, the current or selected line(s) can be commented and uncommented with <kbd>leader</kbd> + <kbd>c</kbd> + <kbd>space</kbd>.
 
 ## Preview
 ![Screenshot of editor](./../../images/editor_nvim.jpg)
