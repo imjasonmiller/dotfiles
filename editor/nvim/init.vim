@@ -85,6 +85,9 @@ hi CocWarningSign   guifg=#E5C07B
 hi CocInfoSign      guifg=#61AFEF
 hi CocHintSign      guifg=#98C379
 
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
 " Lightline
 set noshowmode                          " hide insert status
 let g:lightline = {
