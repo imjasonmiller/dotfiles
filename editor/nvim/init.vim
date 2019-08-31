@@ -29,6 +29,7 @@ Plug 'scrooloose/nerdcommenter'         " improve commenting of code
 Plug 'rust-lang/rust.vim'               " Rust
 Plug 'HerringtonDarkholme/yats.vim'     " TypeScript
 Plug 'cespare/vim-toml'                 " TOML
+Plug 'lervag/vimtex'                    " LaTeX
 
 call plug#end()
 
@@ -38,7 +39,8 @@ let g:coc_global_extensions = [
     \ 'coc-css',
     \ 'coc-rls',
     \ 'coc-eslint',
-    \ 'coc-prettier'
+    \ 'coc-prettier',
+    \ 'coc-vimtex'
     \ ]
 set completeopt=noinsert,menuone,noselect
 
@@ -53,6 +55,7 @@ filetype plugin indent on               " file type detection
 set autoindent                          " auto-indent each line
 set encoding=utf-8                      " enable utf-8 encoding
 set scrolloff=2                         " minimum lines to keep above and below cursor
+
 " Default indentation
 set shiftwidth=4                        " spaces to auto-indent
 set tabstop=4                           " tab width of 4 spaces
@@ -112,6 +115,9 @@ endif
 " Treat .svelte files as html
 au! BufNewFile,BufRead *.svelte set ft=html
 
+" Settings for vimtex
+let g:vimtex_view_method = 'zathura'
+
 " Avoid backups
 set nowritebackup
 set noswapfile
@@ -168,5 +174,8 @@ map L $
 
 " Quick save
 nmap <leader>w :w<CR>
+
+" correct previous spelling mistake
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " TODO: Clipboard
