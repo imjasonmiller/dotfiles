@@ -56,6 +56,10 @@ set autoindent                          " auto-indent each line
 set encoding=utf-8                      " enable utf-8 encoding
 set scrolloff=2                         " minimum lines to keep above and below cursor
 
+" Spell check in LaTeX and Markdown
+set spelllang=nl,en_us
+autocmd FileType tex,markdown,text setlocal spell
+
 " Default indentation
 set shiftwidth=4                        " spaces to auto-indent
 set tabstop=4                           " tab width of 4 spaces
