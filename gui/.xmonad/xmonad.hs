@@ -18,16 +18,17 @@ import XMonad.Util.SpawnOnce
 myTerminal     = "alacritty"
 myModMask      = mod4Mask -- Win key or Super_L
 myBorderWidth  = 0
-myWorkspaces   = ["web", "code", "a", "b", "c", "sfx"]
+myWorkspaces   = ["Web", "Code", "Chat", "Media", "Other"]
 
 myStartupHook = do
   spawnOnce "$HOME/.config/polybar/launch.sh"
   addEWMHFullscreen 
 
 myManageHook = composeAll
-    [ className =? "firefox" --> doShift "web"
-    , className =? "feh"     --> doFloat
-    , isFullscreen           --> doFullFloat
+    [ className =? "firefox"        --> doShift "Web"
+    , resource  =? "desktop_window" --> doIgnore
+    , className =? "feh"            --> doFloat
+    , isFullscreen                  --> doFullFloat 
     , fullscreenManageHook
     ]
 
@@ -36,12 +37,16 @@ myClickJustFocuses  = False
 
 rofiDrun   = "rofi -show run"
 rofiWindow = "rofi -show window"
-rofiCalc   = "rofi -show calc -no-show-match -calc-command \"echo '{result}' | xclip\"" 
+rofiCalc   = "rofi -show calc -no-show-match -no-history -calc-command \"echo '{result}' | xclip\"" 
 
+-- In order for scrot to start in selection mode, it should sleep
+-- See https://wiki.haskell.org/Xmonad/Config_archive/John_Goerzen%27s_Configuration#Customizing_xmonad
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((modm, xK_p), (spawn rofiDrun))
-    , ((modm, xK_f), (spawn rofiWindow))
-    , ((modm, xK_c), (spawn rofiCalc))
+    [ ((0, xK_Print),       (spawn "scrot"))
+    , ((modm, xK_Print),    (spawn "sleep 0.2; scrot -sf"))
+    , ((modm, xK_p),        (spawn rofiDrun))
+    , ((modm, xK_f),        (spawn rofiWindow))
+    , ((modm, xK_c),        (spawn rofiCalc))
     ]
 
 main = do
