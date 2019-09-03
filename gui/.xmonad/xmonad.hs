@@ -26,7 +26,6 @@ myStartupHook = do
 
 myManageHook = composeAll
     [ className =? "firefox"        --> doShift "Web"
-    , resource  =? "desktop_window" --> doIgnore
     , className =? "feh"            --> doFloat
     , isFullscreen                  --> doFullFloat 
     , fullscreenManageHook
@@ -38,12 +37,14 @@ myClickJustFocuses  = False
 rofiDrun   = "rofi -show run"
 rofiWindow = "rofi -show window"
 rofiCalc   = "rofi -show calc -no-show-match -no-history -calc-command \"echo '{result}' | xclip\"" 
-
--- In order for scrot to start in selection mode, it should sleep
+scrotFull  = "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'" 
+-- In order for scrot to start in area selection mode, it should shortly sleep first
 -- See https://wiki.haskell.org/Xmonad/Config_archive/John_Goerzen%27s_Configuration#Customizing_xmonad
+scrotArea  = "sleep 0.2; scrot -sf /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((0, xK_Print),       (spawn "scrot"))
-    , ((modm, xK_Print),    (spawn "sleep 0.2; scrot -sf"))
+    [ ((0, xK_Print),       (spawn scrotFull))
+    , ((modm, xK_Print),    (spawn scrotArea))
     , ((modm, xK_p),        (spawn rofiDrun))
     , ((modm, xK_f),        (spawn rofiWindow))
     , ((modm, xK_c),        (spawn rofiCalc))
