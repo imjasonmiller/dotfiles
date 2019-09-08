@@ -1,0 +1,15 @@
+set from      = "contact@jasonmiller.nl"
+set realname  = "Jason Miller"
+set folder    = "imaps://imap.zoho.com:993"
+set imap_user = "contact@jasonmiller.nl"
+set smtp_url  = "smtp://contact@jasonmiller.nl@smtp.zoho.com:587"
+
+set spoolfile = +Inbox
+set record    = +Sent
+set trash     = +Trash
+set postponed = +Drafts 
+
+set imap_pass = `pass sec/mutt_jasonmiller`
+
+set signature = "~/.config/mutt/signature.txt"
+
