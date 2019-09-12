@@ -182,4 +182,4 @@ nmap <leader>w :w<CR>
 " correct previous spelling mistake
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
-" TODO: Clipboard
+set clipboard+=unnamedplus
