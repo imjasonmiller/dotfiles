@@ -24,6 +24,11 @@ Plug 'neoclide/coc.nvim', {
     \ }                                 " intellisense engine for vim8/neovim
 Plug 'jiangmiao/auto-pairs'             " auto close parens, braces and brackets
 Plug 'scrooloose/nerdcommenter'         " improve commenting of code
+Plug 'junegunn/fzf', {
+    \ 'dir': '~/.fzf',
+    \ 'do': './install --all'
+    \ }
+Plug 'junegunn/fzf.vim'                 " fuzzy finder
 
 " Syntactic language support
 Plug 'rust-lang/rust.vim'               " Rust
@@ -50,11 +55,20 @@ let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/
 inoremap <expr><Tab> (pumvisible() ? (empty(v:completed_item) ? "\<C-n>":"\<C-y>"):"\<Tab>")
 inoremap <expr><CR> (pumvisible() ? (empty(v:completed_item) ? "\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 " Editor settings
 filetype plugin indent on               " file type detection
 set autoindent                          " auto-indent each line
 set encoding=utf-8                      " enable utf-8 encoding
 set scrolloff=2                         " minimum lines to keep above and below cursor
+set mouse=a                             " enable mouse usage in terminal
 
 " Spell check in LaTeX and Markdown
 set spelllang=nl,en_us
@@ -109,6 +123,34 @@ let g:lightline = {
     \ 'colorscheme': 'one',
     \ }
 
+" Search with ripgrep
+if executable('rg')
+    set grepprg=rg\ --no-heading\ --vimgrep
+    set grepformat=%f:%l:%c:%m
+endif
+
+" Fuzzy finder
+let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Hide fuzzy finder status line
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
 " Use 24-bit colors in vim/neovim
 if (empty($TMUX))
     if (has("termguicolors"))
@@ -129,22 +171,40 @@ set nobackup
 
 " Keyboard shortcuts
 " Remap leader key to ,
-let mapleader = ","
+let mapleader = "\<Space>"
 
-" Toggle nerdtree
+" Toggle NERDtree
 nnoremap <leader>a :NERDTreeToggle<Cr>
+
+" Search with ripgrep
+noremap <leader>s :Rg
+
+" Fuzzy finder
+nnoremap <silent> <leader>o :Files<CR>
+nnoremap <silent> <leader>O :Files!<CR>
+nnoremap <silent> <leader>` :Marks<CR>
 
 " Toggle invisible characters
 nnoremap <leader>t :set invlist<Cr>
 
 " Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
+nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " Remap keys for coc gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
+
+" Switch between buffers using <leader>
+nnoremap <leader><leader> <C-^>
+
+" Left and right can switch buffers
+nnoremap <left> :bp<CR>
+nnoremap <right> :bn<CR>
 
 " Map Ctrl+c and Ctrl+j as Esc
 inoremap <C-j> <Esc>
@@ -179,7 +239,7 @@ map L $
 " Quick save
 nmap <leader>w :w<CR>
 
-" correct previous spelling mistake
+" Correct previous spelling mistake
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 set clipboard+=unnamedplus
