@@ -1,3 +1,11 @@
+# Blogs
+
+# Coding Horror
+http://feeds.feedburner.com/codinghorror?format=xml "blog" "programming"
+# Philip Walton
+http://feeds.feedburner.com/philipwalton?format=xml "blog" "programming"
+
+
 # News
 
 # Hacker News
@@ -7,8 +15,20 @@ https://rss.nytimes.com/services/xml/rss/nyt/World.xml "news"
 # Reuters
 http://feeds.reuters.com/reuters/topNews?format=xml "news"
 
+# Reddit
+https://www.reddit.com/r/spacex/.rss "rddt" "space"
+
+# Repositories
+
+# Alacritty
+https://github.com/jwilm/alacritty/releases.atom "repo" "programming"
+# three.js
+https://github.com/mrdoob/three.js/releases.atom "repo" "programming"
+
 # Videos
 
+# Matlab
+https://youtube.com/feeds/videos.xml?channel_id=UCgdHSFcXvkN6O3NXvif0-pA "yt" "math"
 # Numberphile
 https://youtube.com/feeds/videos.xml?channel_id=UCoxcjq-8xIDTYp3uz647V5A "yt" "math"
 # 3Blue1Brown
@@ -19,14 +39,20 @@ https://youtube.com/feeds/videos.xml?channel_id=UCCT8a7d6S6RJUivBgNRsiYg "yt" "p
 https://youtube.com/feeds/videos.xml?channel_id=UCJ6o36XL0CpYb6U5dNBiXHQ "yt" "politics"
 # Kurzgesagt
 https://youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q "yt" "popsci" 
+# Veritasium
+https://youtube.com/feeds/videos.xml?channel_id=UCHnyfMqiRRG1u-2MsSQLbXA "yt" "popsci"
 # Computerphile
 https://youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA "yt" "programming"
 # Fun Fun Function
 https://youtube.com/feeds/videos.xml?channel_id=UCO1cgjhGzsSYb1rsB4bFe4Q "yt" "programming"
+# Google Chrome Developers
+https://youtube.com/feeds/videos.xml?channel_id=UCnUYZLuoy1rq1aVMwx4aTzw "yt" "programming"
 # Jon Gjengset
 https://youtube.com/feeds/videos.xml?channel_id=UC_iD0xppBwwsrM9DegC5cQQ "yt" "programming"
 # Paul Lewis
 https://youtube.com/feeds/videos.xml?channel_id=UCRDEsZDDhVhtHLi0L8-5fow "yt" "programming" 
+# Sebastian Lague
+https://youtube.com/feeds/videos.xml?channel_id=UCmtyQOKKmrMVaKuRXz02jbQ "yt" "programming"
 # BPS.space
 https://youtube.com/feeds/videos.xml?channel_id=UCILl8ozWuxnFYXIe2svjHhg "yt" "space"
 # Curious Droid
@@ -37,6 +63,8 @@ https://youtube.com/feeds/videos.xml?channel_id=UC6uKrU_WqJ1R2HMTY3LIx5Q "yt" "s
 https://youtube.com/feeds/videos.xml?channel_id=UCxzC4EngIsMrPmbm6Nxvb-A "yt" "space"
 # SpaceX
 https://youtube.com/feeds/videos.xml?channel_id=UCtI0Hodo5o5dUb67FeUjDeA "yt" "space" 
+# Ben Eater
+https://youtube.com/feeds/videos.xml?channel_id=UCS0N5baNlQWJCUrhCEo8WlA "yt" "tech"
 # Electronoobs
 https://youtube.com/feeds/videos.xml?channel_id=UCjiVhIvGmRZixSzupD0sS9Q "yt" "tech"
 # GreatScott!
