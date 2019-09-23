@@ -14,6 +14,7 @@ Plug 'machakann/vim-highlightedyank'    " highlight lines while yanking
 Plug 'editorconfig/editorconfig-vim'    " consistent code style across editors
 Plug 'scrooloose/nerdtree'              " file browser
 Plug 'tpope/vim-unimpaired'             " move lines of code around using alt+j/k
+Plug 'airblade/vim-rooter'              " set working directory to project root
 
 " Semantic language support
 Plug 'airblade/vim-gitgutter'           " show git changes in the sign column
@@ -69,6 +70,11 @@ set autoindent                          " auto-indent each line
 set encoding=utf-8                      " enable utf-8 encoding
 set scrolloff=2                         " minimum lines to keep above and below cursor
 set mouse=a                             " enable mouse usage in terminal
+set formatoptions=tc                    " wrap text and comments using textwidth
+set formatoptions+=r                    " continue comments on enter in insert mode
+set formatoptions+=q                    " enable formatting of comments with gq
+set formatoptions+=n                    " detect lists for formatting
+set formatoptions+=b                    " auto-wrap in insert mode, do not wrap old long lines
 
 " Spell check in LaTeX and Markdown
 set spelllang=nl,en_us
@@ -146,6 +152,14 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" Use ripgrep for fzf:
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
 " Hide fuzzy finder status line
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
@@ -183,6 +197,14 @@ noremap <leader>s :Rg
 nnoremap <silent> <leader>o :Files<CR>
 nnoremap <silent> <leader>O :Files!<CR>
 nnoremap <silent> <leader>` :Marks<CR>
+nmap <leader>; :Buffers<CR>
+
+" Align search result to middle of page
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
 
 " Toggle invisible characters
 nnoremap <leader>t :set invlist<Cr>
