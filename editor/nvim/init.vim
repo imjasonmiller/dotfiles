@@ -50,6 +50,11 @@ let g:coc_global_extensions = [
     \ ]
 set completeopt=noinsert,menuone,noselect
 
+" Set build directory for vimtex
+" let g:vimtex_compiler_latexmk = {
+    " \ 'build_dir' : 'dist',
+" \}
+
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
 
 " Do not hijack the Enter key
@@ -76,6 +81,12 @@ set formatoptions+=q                    " enable formatting of comments with gq
 set formatoptions+=n                    " detect lists for formatting
 set formatoptions+=b                    " auto-wrap in insert mode, do not wrap old long lines
 
+" Improve search
+set incsearch                           " show pattern matches
+set ignorecase                          " ignore cases in term
+set smartcase                           " override ignorecase if term contains uppercase
+set gdefault                            " substitute all matches in a line
+
 " Spell check in LaTeX and Markdown
 set spelllang=nl,en_us
 autocmd FileType tex,markdown,text setlocal spell
@@ -96,6 +107,7 @@ set cursorline                          " highlight the current line
 set background=dark
 hi normal guibg=none ctermbg=none       " transparent background
 set shortmess+=c                        " suppress 'match x of y' messages
+set number relativenumber               " hybrid relative line numbers
 
 " Show and highlight invisible characters
 set nolist                              " hide by default, as they are toggled
@@ -187,11 +199,15 @@ set nobackup
 " Remap leader key to ,
 let mapleader = "\<Space>"
 
+" Preserve selection when (de)indenting in visual mode
+vnoremap > >gv
+vnoremap < <gv
+
 " Toggle NERDtree
 nnoremap <leader>a :NERDTreeToggle<Cr>
 
 " Search with ripgrep
-noremap <leader>s :Rg
+noremap <leader>s :Rg<Space>
 
 " Fuzzy finder
 nnoremap <silent> <leader>o :Files<CR>
