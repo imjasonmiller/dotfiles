@@ -33,7 +33,9 @@ Plug 'junegunn/fzf.vim'                 " fuzzy finder
 
 " Syntactic language support
 Plug 'rust-lang/rust.vim'               " Rust
-Plug 'HerringtonDarkholme/yats.vim'     " TypeScript
+Plug 'pangloss/vim-javascript'          " JavaScript
+Plug 'mxw/vim-jsx'                      " JavaScript XML
+Plug 'leafgarland/typescript-vim'       " TypeScript
 Plug 'cespare/vim-toml'                 " TOML
 Plug 'lervag/vimtex'                    " LaTeX
 
@@ -49,11 +51,6 @@ let g:coc_global_extensions = [
     \ 'coc-vimtex'
     \ ]
 set completeopt=noinsert,menuone,noselect
-
-" Set build directory for vimtex
-" let g:vimtex_compiler_latexmk = {
-    " \ 'build_dir' : 'dist',
-" \}
 
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
 
