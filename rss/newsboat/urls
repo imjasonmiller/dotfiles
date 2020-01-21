@@ -2,9 +2,12 @@
 
 # Coding Horror
 http://feeds.feedburner.com/codinghorror?format=xml "blog" "programming"
+# Dion Dokter
+https://blog.carminecrystal.com/feeds/all.rss.xml "blog" "programming"
 # Philip Walton
 http://feeds.feedburner.com/philipwalton?format=xml "blog" "programming"
-
+# Jason Miller
+https://jasonmiller.nl/journal/index.xml "blog" "programming"
 
 # News
 
@@ -41,6 +44,8 @@ https://youtube.com/feeds/videos.xml?channel_id=UCJ6o36XL0CpYb6U5dNBiXHQ "yt" "p
 https://youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q "yt" "popsci" 
 # Veritasium
 https://youtube.com/feeds/videos.xml?channel_id=UCHnyfMqiRRG1u-2MsSQLbXA "yt" "popsci"
+# Christopher Okhravi
+https://youtube.com/feeds/videos.xml?channel_id=UCbF-4yQQAWw-UnuCd2Azfzg "yt" "programming"
 # Computerphile
 https://youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA "yt" "programming"
 # Fun Fun Function
@@ -63,12 +68,16 @@ https://youtube.com/feeds/videos.xml?channel_id=UC6uKrU_WqJ1R2HMTY3LIx5Q "yt" "s
 https://youtube.com/feeds/videos.xml?channel_id=UCxzC4EngIsMrPmbm6Nxvb-A "yt" "space"
 # SpaceX
 https://youtube.com/feeds/videos.xml?channel_id=UCtI0Hodo5o5dUb67FeUjDeA "yt" "space" 
+# Afrotechmods
+https://youtube.com/feeds/videos.xml?channel_id=UCosnWgi3eorc1klEQ8pIgJQ "yt" "tech"
 # Ben Eater
 https://youtube.com/feeds/videos.xml?channel_id=UCS0N5baNlQWJCUrhCEo8WlA "yt" "tech"
 # Electronoobs
 https://youtube.com/feeds/videos.xml?channel_id=UCjiVhIvGmRZixSzupD0sS9Q "yt" "tech"
 # GreatScott!
 https://youtube.com/feeds/videos.xml?channel_id=UC6mIxFTvXkWQVEHPsEdflzQ "yt" "tech"
+# Robert Feranec
+https://youtube.com/feeds/videos.xml?channel_id=UCJQkHVpk3A8bgDmPlJlOJOA "yt" "tech"
 # Игорь Негода
 https://youtube.com/feeds/videos.xml?channel_id=UCb9_Bhv37NXN1m8Bmrm9x9w "yt" "tech"
 # Joop Brokking
@@ -79,9 +88,14 @@ https://youtube.com/feeds/videos.xml?channel_id=UCAL3JXZSzSm8AlZyD3nQdBA "yt" "t
 https://youtube.com/feeds/videos.xml?channel_id=UCq2rNse2XX4Rjzmldv9GqrQ "yt" "tech"
 # Real Engineering
 https://youtube.com/feeds/videos.xml?channel_id=UCR1IuLEqb6UEA_zQ81kwXfg "yt" "tech"
+# Real Science
+https://youtube.com/feeds/videos.xml?channel_id=UC176GAQozKKjhz62H8u9vQQ "yt" "science"
 # Strange Parts
 https://youtube.com/feeds/videos.xml?channel_id=UCO8DQrSp5yEP937qNqTooOw "yt" "tech"
 # Tom Scott
 https://youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A "yt" "tech" 
 # Tom Stanton
 https://youtube.com/feeds/videos.xml?channel_id=UC67gfx2Fg7K2NSHqoENVgwA "yt" "tech" 
+# Two Minute Papers
+https://youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg "yt" "tech"
+
