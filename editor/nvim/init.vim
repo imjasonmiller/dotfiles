@@ -8,6 +8,7 @@ Plug 'joshdick/onedark.vim'             " one dark theme
 
 " Gui enhancements
 Plug 'itchyny/lightline.vim'            " improved status line
+Plug 'itchyny/vim-gitbranch'            " current git branch in status line
 Plug 'machakann/vim-highlightedyank'    " highlight lines while yanking
 
 " Editor enhancements
@@ -23,21 +24,26 @@ Plug 'airblade/vim-gitgutter'           " show git changes in the sign column
 Plug 'neoclide/coc.nvim', {
     \ 'branch': 'release'
     \ }                                 " intellisense engine for vim8/neovim
-Plug 'jiangmiao/auto-pairs'             " auto close parens, braces and brackets
+Plug 'tpope/vim-surround'               " easily delete, change and add pairs.
+Plug 'jiangmiao/auto-pairs'             " auto close pairs
 Plug 'scrooloose/nerdcommenter'         " improve commenting of code
 Plug 'junegunn/fzf', {
     \ 'dir': '~/.fzf',
     \ 'do': './install --all'
     \ }
 Plug 'junegunn/fzf.vim'                 " fuzzy finder
+Plug 'godlygeek/tabular'                " align text
 
 " Syntactic language support
-Plug 'rust-lang/rust.vim'               " Rust
-Plug 'pangloss/vim-javascript'          " JavaScript
-Plug 'mxw/vim-jsx'                      " JavaScript XML
-Plug 'leafgarland/typescript-vim'       " TypeScript
-Plug 'cespare/vim-toml'                 " TOML
-Plug 'lervag/vimtex'                    " LaTeX
+Plug 'rust-lang/rust.vim'               " rust
+Plug 'pangloss/vim-javascript'          " javascript
+Plug 'leafgarland/typescript-vim'       " typescript
+Plug 'maxmellon/vim-jsx-pretty'         " jsx for javascript and typescript
+Plug 'jparise/vim-graphql'              " graphql
+Plug 'StanAngeloff/php.vim'             " php
+Plug 'plasticboy/vim-markdown'          " markdown
+Plug 'cespare/vim-toml'                 " toml
+Plug 'lervag/vimtex'                    " latex
 
 call plug#end()
 
@@ -45,18 +51,13 @@ call plug#end()
 let g:coc_global_extensions = [
     \ 'coc-tsserver',
     \ 'coc-css',
-    \ 'coc-rls',
+    \ 'coc-rust-analyzer',
     \ 'coc-eslint',
     \ 'coc-prettier',
     \ 'coc-vimtex'
     \ ]
 set completeopt=noinsert,menuone,noselect
-
-let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
-
-" Do not hijack the Enter key
-inoremap <expr><Tab> (pumvisible() ? (empty(v:completed_item) ? "\<C-n>":"\<C-y>"):"\<Tab>")
-inoremap <expr><CR> (pumvisible() ? (empty(v:completed_item) ? "\<CR>\<CR>":"\<C-y>"):"\<CR>")
+let g:rustfmt_autosave = 1
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -69,8 +70,10 @@ endfunction
 " Editor settings
 filetype plugin indent on               " file type detection
 set autoindent                          " auto-indent each line
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set encoding=utf-8                      " enable utf-8 encoding
 set scrolloff=2                         " minimum lines to keep above and below cursor
+set hidden                              " do not unload buffer after switching 
 set mouse=a                             " enable mouse usage in terminal
 set formatoptions=tc                    " wrap text and comments using textwidth
 set formatoptions+=r                    " continue comments on enter in insert mode
@@ -86,7 +89,10 @@ set gdefault                            " substitute all matches in a line
 
 " Spell check in LaTeX and Markdown
 set spelllang=nl,en_us
-autocmd FileType tex,markdown,text setlocal spell
+au FileType tex,markdown,text setlocal spell
+
+" Rust code style guidelines
+au Filetype rust set colorcolumn=100
 
 " Default indentation
 set shiftwidth=4                        " spaces to auto-indent
@@ -100,11 +106,13 @@ colorscheme onedark                     " onedark color scheme
 set ttyfast                             " indicate a fast terminal connection
 set lazyredraw                          " reduce updates while not typing
 set laststatus=2                        " always show the status line
+set nofoldenable                        " disable code folding
 set cursorline                          " highlight the current line
 set background=dark
 hi normal guibg=none ctermbg=none       " transparent background
 set shortmess+=c                        " suppress 'match x of y' messages
 set number relativenumber               " hybrid relative line numbers
+set colorcolumn=80                      " hightlight long lines
 
 " Show and highlight invisible characters
 set nolist                              " hide by default, as they are toggled
@@ -132,10 +140,23 @@ hi CocHintSign      guifg=#98C379
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
+" React comment support for .tsx and .jsx files
+let g:NERDCustomDelimiters = {
+  \ 'javascript.jsx': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' },
+  \ 'typescript.tsx': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' }
+  \ }
+
 " Lightline
 set noshowmode                          " hide insert status
 let g:lightline = {
     \ 'colorscheme': 'one',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'gitbranch#name'
+    \ },
     \ }
 
 " Search with ripgrep
@@ -161,6 +182,10 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" Add preview for fzf
+command! -bang -nargs=? -complete=dir FzfFiles
+    \ call fzf#vim#files(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : {}, <bang>0)
+
 " Use ripgrep for fzf:
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
@@ -170,9 +195,9 @@ command! -bang -nargs=* Rg
       \   <bang>0)
 
 " Hide fuzzy finder status line
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+au! FileType fzf
+au  FileType fzf set laststatus=0 noshowmode noruler
+  \| au BufLeave <buffer> set laststatus=2 showmode ruler
 
 " Use 24-bit colors in vim/neovim
 if (empty($TMUX))
@@ -181,8 +206,16 @@ if (empty($TMUX))
     endif
 endif
 
+" Markdown options
+let g:vim_markdown_math = 1
+let g:vim_markdown_toml_frontmatter = 1
+
 " Treat .svelte files as html
 au! BufNewFile,BufRead *.svelte set ft=html
+
+" Syntax highlight support for React with JavaScript or TypeScript 
+au! BufNewFile,BufRead *.jsx set ft=javascript.jsx
+au! BufNewFile,BufRead *.tsx set ft=typescript.tsx
 
 " Settings for vimtex
 let g:vimtex_view_method = 'zathura'
@@ -199,6 +232,10 @@ let mapleader = "\<Space>"
 " Preserve selection when (de)indenting in visual mode
 vnoremap > >gv
 vnoremap < <gv
+
+" Do not hijack the Enter key
+inoremap <expr><Tab> (pumvisible() ? (empty(v:completed_item) ? "\<C-n>":"\<C-y>"):"\<Tab>")
+inoremap <expr><CR> (pumvisible() ? (empty(v:completed_item) ? "\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " Toggle NERDtree
 nnoremap <leader>a :NERDTreeToggle<Cr>
@@ -228,6 +265,9 @@ nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
 
 " Remap keys for coc gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -264,8 +304,9 @@ vmap <A-j> ]egv
 vmap <A-k> [egv
 
 " Improve hjkl-movement for soft wrapped rows
-nnoremap j gj
-nnoremap k gk
+" https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " Jump to start and end of line using the home row keys
 map H ^
