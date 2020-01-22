@@ -1,7 +1,7 @@
 # Newsboat
 
 # The %u is replaced by the url
-browser "firefox %u"
+browser "firefox-developer-edition %u"
 feed-sort-order title
 
 # Vim-like bindings
