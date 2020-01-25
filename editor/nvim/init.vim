@@ -150,7 +150,7 @@ let g:NERDCustomDelimiters = {
 " Lightline
 set noshowmode                          " hide insert status
 let g:lightline = {
-    \ 'colorscheme': 'one',
+    \ 'colorscheme': 'Base2Tone_Evening',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
