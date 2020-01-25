@@ -4,7 +4,8 @@ set shell=/bin/bash
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Theme
-Plug 'joshdick/onedark.vim'             " one dark theme
+" Plug 'joshdick/onedark.vim'           " one dark theme
+Plug 'atelierbram/Base2Tone-vim'        " base two tone theme
 
 " Gui enhancements
 Plug 'itchyny/lightline.vim'            " improved status line
@@ -103,7 +104,7 @@ set expandtab                           " expand tabs to spaces
 " GUI settings
 syntax on                               " syntax highlighting
 set synmaxcol=500                       " no syntax highlight on long lines for perf.
-colorscheme onedark                     " onedark color scheme
+colorscheme Base2Tone_EveningDark       " base two tone color scheme
 set ttyfast                             " indicate a fast terminal connection
 set lazyredraw                          " reduce updates while not typing
 set laststatus=2                        " always show the status line
