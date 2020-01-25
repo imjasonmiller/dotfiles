@@ -44,6 +44,7 @@ Plug 'StanAngeloff/php.vim'             " php
 Plug 'plasticboy/vim-markdown'          " markdown
 Plug 'cespare/vim-toml'                 " toml
 Plug 'lervag/vimtex'                    " latex
+Plug 'cstrahan/vim-capnp'               " cap'n proto
 
 call plug#end()
 
