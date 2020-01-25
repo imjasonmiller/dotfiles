@@ -102,16 +102,15 @@ set tabstop=4                           " tab width of 4 spaces
 set expandtab                           " expand tabs to spaces
 
 " GUI settings
+colorscheme Base2Tone_EveningDark       " base two tone color scheme
 syntax on                               " syntax highlighting
 set synmaxcol=500                       " no syntax highlight on long lines for perf.
-colorscheme Base2Tone_EveningDark       " base two tone color scheme
 set ttyfast                             " indicate a fast terminal connection
 set lazyredraw                          " reduce updates while not typing
 set laststatus=2                        " always show the status line
 set nofoldenable                        " disable code folding
 set cursorline                          " highlight the current line
 set background=dark
-hi normal guibg=none ctermbg=none       " transparent background
 set shortmess+=c                        " suppress 'match x of y' messages
 set number relativenumber               " hybrid relative line numbers
 set colorcolumn=80                      " hightlight long lines
