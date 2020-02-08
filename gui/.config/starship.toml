@@ -1,0 +1,14 @@
+[character]
+symbol = ""
+
+[hg_branch]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[package]
+symbol = " "
+
+[rust]
+symbol = " "
