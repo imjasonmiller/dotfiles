@@ -36,7 +36,7 @@ Plug 'junegunn/fzf.vim'                 " fuzzy finder
 Plug 'godlygeek/tabular'                " align text
 
 " Syntactic language support
-Plug 'rust-lang/rust.vim'               " rust
+Plug 'arzg/vim-rust-syntax-ext'         " rust
 Plug 'pangloss/vim-javascript'          " javascript
 Plug 'leafgarland/typescript-vim'       " typescript
 Plug 'maxmellon/vim-jsx-pretty'         " jsx for javascript and typescript
@@ -45,6 +45,7 @@ Plug 'StanAngeloff/php.vim'             " php
 Plug 'plasticboy/vim-markdown'          " markdown
 Plug 'cespare/vim-toml'                 " toml
 Plug 'lervag/vimtex'                    " latex
+Plug 'ron-rs/ron.vim'                   " rust object notation
 Plug 'cstrahan/vim-capnp'               " cap'n proto
 
 call plug#end()
@@ -102,7 +103,7 @@ set tabstop=4                           " tab width of 4 spaces
 set expandtab                           " expand tabs to spaces
 
 " GUI settings
-colorscheme Base2Tone_SpaceDark       " base two tone color scheme
+colorscheme Base2Tone_EveningDark       " base two tone color scheme
 syntax on                               " syntax highlighting
 set synmaxcol=500                       " no syntax highlight on long lines for perf.
 set ttyfast                             " indicate a fast terminal connection
@@ -123,6 +124,25 @@ set listchars+=precedes:«
 set listchars+=nbsp:¬                   " non-breaking space
 set listchars+=trail:•                  " trailing whitespace
 hi WhiteSpace guifg=#C678DD             " purple color for characters
+
+" Debugger for Rust
+packadd! termdebug
+nmap <leader>dd :Termdebug<space>
+nmap <silent> <leader>dD :call TermDebugSendCommand('quit')<cr>:Gdb<cr>y<cr>
+nmap <leader>dr :Run<cr>
+nmap <leader>dR :Stop<cr>
+nmap <leader>db :Break<cr>
+nmap <leader>dB :Clear<cr>
+nmap <leader>ds :Step<cr>
+nmap <leader>dn :Over<cr>
+nmap <leader>df :Finish<cr>
+nmap <leader>dc :Continue<cr>
+nmap <leader>dp :Evaluate<cr>
+nmap <leader>de :Evaluate<space>
+nmap <leader>dl :call TermDebugSendCommand('info locals')<cr>
+nmap <leader>da :call TermDebugSendCommand('info args')<cr>
+let g:termdebug_wide=1
+let g:termdebugger="rust-gdb"
 
 " Change cursor and add incremental commands
 if has('nvim')
