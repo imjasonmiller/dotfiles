@@ -59,8 +59,8 @@ let g:coc_global_extensions = [
     \ 'coc-prettier',
     \ 'coc-vimtex'
     \ ]
+
 set completeopt=noinsert,menuone,noselect
-let g:rustfmt_autosave = 1
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -290,6 +290,7 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap keys for coc gotos
+nmap <silent> ga <Plug>(coc-codeaction)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
