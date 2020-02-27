@@ -17,6 +17,8 @@ https://hnrss.org/frontpage "tech"
 https://rss.nytimes.com/services/xml/rss/nyt/World.xml "news"
 # Reuters
 http://feeds.reuters.com/reuters/topNews?format=xml "news"
+# This Week in Rust
+https://this-week-in-rust.org/rss.xml "news" "programming"
 
 # Reddit
 https://www.reddit.com/r/spacex/.rss "rddt" "space"
