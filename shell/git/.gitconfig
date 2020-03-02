@@ -1,11 +1,14 @@
 [user]
     email = contact@jasonmiller.nl
     name = Jason Miller
-    signingkey = 11DED1289B3C3ABF76CA8E90A301544D2EEEFDFC
+    signingkey = C7837ACE0865BDDE  
 [core]
     autocrlf = input
     safecrlf = true
     editor = nvim
+[alias]
+    code-changes = !git log --format=format: --name-only | rg -v '^$' | sort | uniq -c | sort -rg | head -10
+    cc = !git code-changes
 [difftool "nvim-diff"]
     cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
 [diff]
