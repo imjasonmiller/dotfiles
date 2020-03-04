@@ -127,22 +127,10 @@ hi WhiteSpace guifg=#C678DD             " purple color for characters
 
 " Debugger for Rust
 packadd! termdebug
-nmap <leader>dd :Termdebug<space>
-nmap <silent> <leader>dD :call TermDebugSendCommand('quit')<cr>:Gdb<cr>y<cr>
-nmap <leader>dr :Run<cr>
-nmap <leader>dR :Stop<cr>
-nmap <leader>db :Break<cr>
-nmap <leader>dB :Clear<cr>
-nmap <leader>ds :Step<cr>
-nmap <leader>dn :Over<cr>
-nmap <leader>df :Finish<cr>
-nmap <leader>dc :Continue<cr>
-nmap <leader>dp :Evaluate<cr>
-nmap <leader>de :Evaluate<space>
-nmap <leader>dl :call TermDebugSendCommand('info locals')<cr>
-nmap <leader>da :call TermDebugSendCommand('info args')<cr>
 let g:termdebug_wide=1
 let g:termdebugger="rust-gdb"
+hi debugBreakpoint term=reverse guifg=#212734 guibg=#FFAD5C
+hi debugPC term=reverse guibg=#545167
 
 " Change cursor and add incremental commands
 if has('nvim')
@@ -256,6 +244,23 @@ vnoremap < <gv
 " Do not hijack the Enter key
 inoremap <expr><Tab> (pumvisible() ? (empty(v:completed_item) ? "\<C-n>":"\<C-y>"):"\<Tab>")
 inoremap <expr><CR> (pumvisible() ? (empty(v:completed_item) ? "\<CR>\<CR>":"\<C-y>"):"\<CR>")
+
+" Debugging
+" Jump between windows by using :Gdb, :Source, :Program
+nmap <leader>dd :Termdebug<space>
+nmap <silent> <leader>dD :call TermDebugSendCommand('quit')<cr>:Gdb<cr>y<cr>
+nmap <leader>dr :Run<cr>
+nmap <leader>dR :Stop<cr>
+nmap <leader>db :Break<cr>
+nmap <leader>dB :Clear<cr>
+nmap <leader>ds :Step<cr>
+nmap <leader>dn :Over<cr>
+nmap <leader>df :Finish<cr>
+nmap <leader>dc :Continue<cr>
+nmap <leader>dp :Evaluate<cr>
+nmap <leader>de :Evaluate<space>
+nmap <leader>dl :call TermDebugSendCommand('info locals')<cr>
+nmap <leader>da :call TermDebugSendCommand('info args')<cr>
 
 " Toggle NERDtree
 nnoremap <leader>a :NERDTreeToggle<Cr>
