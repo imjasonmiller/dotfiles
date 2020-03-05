@@ -1,0 +1,56 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 24,
+    "modules-left": ["clock", "sway/workspaces", "sway/window"],
+    "modules-right":["pulseaudio", "network", "cpu", "tray"],
+ 
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": " {name} ",
+        "persistent_workspaces": {
+            "Web": [],
+            "Code": [],
+            "Other": [],
+            "Media": [],
+            "Chat": []
+        }
+    },
+
+    "sway/window": {
+        "format": " {}"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+
+    "clock": {
+        "format": "{:%a %H:%M %p}", 
+        "format-alt": "{:%a %b%e %H:%M %p}", 
+        "tooltip": false
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% <span rise=\"-2750\" size=\"x-large\">{icon}</span>",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "tooltip": false
+    },
+
+    "network": {
+        "interface": "enp3s0",
+        "format-ethernet": "{ipaddr} <span rise=\"-2750\" size=\"x-large\"> </span>",
+        "format-disconnected": "Disconnected",
+        "tooltip": false
+    },
+
+    "cpu": {
+        "format": "CPU {usage}%",
+        "tooltip": false
+    }
+}
