@@ -347,4 +347,16 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " Quit all
 noremap <C-q> :confirm qall<CR>
 
-set clipboard+=unnamedplus
+let g:clipboard = {
+    \ 'name': 'wayland',
+    \ 'copy': {
+        \ '+': 'wl-copy',
+        \ '*': 'wl-copy --primary',
+    \ },
+    \ 'paste': {
+        \ '+': 'wl-paste --no-newline', 
+        \ '*': 'wl-paste --no-newline --primary',
+    \ },
+\ }
+
+set clipboard=unnamedplus
