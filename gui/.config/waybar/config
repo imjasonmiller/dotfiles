@@ -1,7 +1,7 @@
 {
     "layer": "top",
-    "position": "bottom",
-    "height": 24,
+    "position": "top",
+    "height": 25,
     "modules-left": ["clock", "sway/workspaces", "sway/window"],
     "modules-right":["pulseaudio", "network", "cpu", "tray"],
  
@@ -10,11 +10,11 @@
         "all-outputs": true,
         "format": " {name} ",
         "persistent_workspaces": {
-            "Web": [],
-            "Code": [],
-            "Other": [],
-            "Media": [],
-            "Chat": []
+            "1:Web": [],
+            "2:Code": [],
+            "3:Other": [],
+            "4:Media": [],
+            "5:Chat": []
         }
     },
 
@@ -28,13 +28,13 @@
     },
 
     "clock": {
-        "format": "{:%a %H:%M %p}", 
-        "format-alt": "{:%a %b%e %H:%M %p}", 
+        "format": "{:%a  %H:%M  %p}", 
+        "format-alt": "{:%a  %b%e  %H:%M  %p}", 
         "tooltip": false
     },
 
     "pulseaudio": {
-        "format": "{volume}% <span rise=\"-2750\" size=\"x-large\">{icon}</span>",
+        "format": "{volume}% <span rise=\"-3500\" size=\"x-large\">{icon}</span>",
         "format-icons": {
             "default": ["", "", ""]
         },
@@ -44,7 +44,7 @@
 
     "network": {
         "interface": "enp3s0",
-        "format-ethernet": "{ipaddr} <span rise=\"-2750\" size=\"x-large\"> </span>",
+        "format-ethernet": "{ipaddr} <span rise=\"-2500\" size=\"x-large\"> </span>",
         "format-disconnected": "Disconnected",
         "tooltip": false
     },
