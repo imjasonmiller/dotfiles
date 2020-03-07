@@ -8,7 +8,27 @@
 }
 
 window#waybar {
-    background-color: #000;
+    /* Smooth gradient
+     * For more information, see: https://larsenwork.com/easing-gradients
+     **/
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.897) 8.1%,
+        rgba(0, 0, 0, 0.89) 15.5%,
+        rgba(0, 0, 0, 0.879) 22.5%,
+        rgba(0, 0, 0, 0.865) 29%,
+        rgba(0, 0, 0, 0.848) 35.3%,
+        rgba(0, 0, 0, 0.83) 41.2%,
+        rgba(0, 0, 0, 0.81) 47.1%,
+        rgba(0, 0, 0, 0.79) 52.9%,
+        rgba(0, 0, 0, 0.77) 58.8%,
+        rgba(0, 0, 0, 0.752) 64.7%,
+        rgba(0, 0, 0, 0.735) 71%,
+        rgba(0, 0, 0, 0.721) 77.5%,
+        rgba(0, 0, 0, 0.71) 84.5%,
+        rgba(0, 0, 0, 0.703) 91.9%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
     color: #ffffff;
 }
 
@@ -21,8 +41,7 @@ window#waybar.termite {
 }
 
 window#waybar.chromium {
-    background-color: #000000;
-    border: none;
+    background-color: transparent;
 }
 
 #workspaces button {
@@ -31,7 +50,6 @@ window#waybar.chromium {
     color: #727272;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button.focused {
     color: #fff;
 }
@@ -42,7 +60,6 @@ window#waybar.chromium {
 
 #mode {
     background-color: #64727d;
-    border-bottom: 3px solid #ffffff;
 }
 
 #clock,
@@ -61,6 +78,14 @@ window#waybar.chromium {
     padding: 0 4px;
     margin: 0 2px;
     color: #ffffff;
+}
+
+#clock {
+    margin-left: 8px;
+}
+
+#tray {
+    margin-right: 8px;
 }
 
 #battery {
@@ -95,7 +120,7 @@ label:focus {
 }
 
 #cpu {
-    background-color: #000;
+    background-color: transparent;
     color: #fff;
 }
 
@@ -108,7 +133,7 @@ label:focus {
 }
 
 #network {
-    background-color: #000;
+    background-color: transparent;
 }
 
 #network.disconnected {
@@ -147,7 +172,7 @@ label:focus {
 }
 
 #tray {
-    background-color: #000;
+    background-color: transparent;
 }
 
 #idle_inhibitor {
@@ -157,21 +182,4 @@ label:focus {
 #idle_inhibitor.activated {
     background-color: #ecf0f1;
     color: #2d3436;
-}
-
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
 }
