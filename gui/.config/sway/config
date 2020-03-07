@@ -13,15 +13,16 @@ set $right l
 set $terminal alacritty
 
 # Workspaces
-set $ws1 Web
-set $ws2 Code
-set $ws3 Other
-set $ws4 Media
-set $ws5 Chat
+set $ws1 1:Web
+set $ws2 2:Code
+set $ws3 3:Other
+set $ws4 4:Media
+set $ws5 5:Chat
 
 ### Output configuration
 output "*" {
-    background #000000 solid_color
+    # background #000000 solid_color
+    background ~/pics/wallpaper/mars-globe-valles-marineris-enhanced.png fill
 }
 
 set $output1 "HDMI-A-2"
@@ -33,6 +34,9 @@ output $output1 {
 # Hide borders
 default_border none
 default_floating_border none
+
+# Add gaps
+# gaps inner 10
 
 ### Input configuration
 input type:keyboard {
@@ -55,7 +59,8 @@ input type:keyboard {
     bindsym $mod+Shift+c kill
 
     # Start your launcher
-    bindsym $mod+p exec rofi -show run
+    # bindsym $mod+p exec rofi -show run
+    bindsym $mod+p exec rofi -run-list-command ". ~/.bash_aliases" -run-command "/bin/bash -i -c '{cmd}'" -show run
     bindsym $mod+c exec rofi -show calc -no-show-match
 
     # Drag floating windows by holding down $mod and left mouse button.
@@ -107,7 +112,8 @@ input type:keyboard {
 
 #
 # Workspaces:
-#
+# 
+
     # Switch to workspace
     bindsym $mod+1 workspace $ws1
     bindsym $mod+2 workspace $ws2
@@ -169,8 +175,8 @@ input type:keyboard {
     # down will grow the containers height
     # bindsym $mod+Shift+$left resize shrink width 10px
     # bindsym $mod+Shift+$right resize grow height 10px
-    bindsym $mod+h resize shrink width 40px
-    bindsym $mod+l resize grow width 40px
+    bindsym $mod+h resize shrink width 80px
+    bindsym $mod+l resize grow width 80px
 
     # Ditto, with arrow keys
     # bindsym Left resize shrink width 10px
@@ -191,5 +197,8 @@ bar {
 
 # Notifcations via Mako
 exec mako
+
+# Adjust screen colors based on surroundings
+exec redshift
 
 include /etc/sway/config.d/*
