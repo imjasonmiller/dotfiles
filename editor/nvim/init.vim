@@ -50,6 +50,9 @@ Plug 'cstrahan/vim-capnp'               " cap'n proto
 
 call plug#end()
 
+" Regular regular expressions
+source ~/.config/nvim/regex.vim
+
 " Autocomplete and plugins
 let g:coc_global_extensions = [
     \ 'coc-tsserver',
@@ -246,7 +249,6 @@ inoremap <expr><Tab> (pumvisible() ? (empty(v:completed_item) ? "\<C-n>":"\<C-y>
 inoremap <expr><CR> (pumvisible() ? (empty(v:completed_item) ? "\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " Debugging
-" Jump between windows by using :Gdb, :Source, :Program
 nmap <leader>dd :Termdebug<space>
 nmap <silent> <leader>dD :call TermDebugSendCommand('quit')<cr>:Gdb<cr>y<cr>
 nmap <leader>dr :Run<cr>
