@@ -138,6 +138,7 @@ input type:keyboard {
 
     for_window [window_role="pop-up"] floating enable
     for_window [window_role="task_dialog"] floating enable
+
 #
 # Layout:
 #
@@ -172,9 +173,27 @@ input type:keyboard {
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
+   # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
+
+# Power menu
+    # set $sysmenu "  [<b>r</b>]estart - [<b>l</b>]ogout - [<b>s</b>]uspend - re[<b>b</b>]oot - po[<b>w</b>]eroff  "
+    set $sysmenu "(r)estart (l)ogout) (s)uspend re(b)oot po(w)eroff"
+
+    bindsym $mod+Shift+e mode $sysmenu
+
+    mode $sysmenu {
+        bindsym r         restart
+        bindsym l         exit
+        bindsym w         exec "systemctl poweroff"
+        bindsym b         exec "systemctl reboot"
+        bindsym s         exec "systemctl suspend"
+        bindsym Return    mode "default"
+        bindsym Escape    mode "default"
+    }
+
 #
 # Resizing containers:
 #
