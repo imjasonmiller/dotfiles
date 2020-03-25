@@ -59,7 +59,7 @@ window#waybar.chromium {
 }
 
 #mode {
-    background-color: #64727d;
+    background-color: transparent;
 }
 
 #clock,

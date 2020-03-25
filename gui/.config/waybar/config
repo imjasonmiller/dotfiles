@@ -3,7 +3,7 @@
     "position": "top",
     "height": 25,
     "modules-left": ["clock", "sway/workspaces", "sway/window"],
-    "modules-right":["pulseaudio", "network", "cpu", "tray"],
+    "modules-right":["sway/mode", "pulseaudio", "network", "cpu", "tray"],
  
     "sway/workspaces": {
         "disable-scroll": true,
@@ -31,6 +31,11 @@
         "format": "{:%a  %H:%M  %p}", 
         "format-alt": "{:%a  %b%e  %H:%M  %p}", 
         "tooltip": false
+    },
+
+    "sway/mode": {
+        "format": "<span rise=\"-2500\" size=\"x-large\"> </span>  {} ",
+        "max-length": 50
     },
 
     "pulseaudio": {
