@@ -134,10 +134,24 @@ input type:keyboard {
     assign [class="^figma-linux$"] $ws4
     assign [class="^Spotify$"] $ws4
     assign [class="^vlc$"] $ws4
-    assign [class="^TelegramDesktop$"] $ws5
+    assign [app_id="telegramdesktop"] $ws5
+
+    for_window [window_role="pavucontrol-qt"] floating enable
 
     for_window [window_role="pop-up"] floating enable
+    for_window [window_role="bubble"] floating enable
     for_window [window_role="task_dialog"] floating enable
+    for_window [window_role="dialog"] floating enable
+    for_window [window_role="menu"] floating enable
+    for_window [app_id="qt4-ssh-askpass"] floating enable
+    for_window [class="Qt4-ssh-askpass"] floating enable
+
+    for_window [window_role="GtkFileChooserDialog"] resize set 640 600
+    for_window [window_role="GtkFileChooserDialog"] move position center
+    for_window [title="Open file"] resize set 640 600
+
+    for_window [title="Choose files"] floating enable 
+    for_window [title="Choose files"] resize set 640 600
 
 #
 # Layout:
