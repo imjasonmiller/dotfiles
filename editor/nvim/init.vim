@@ -352,12 +352,12 @@ noremap <C-q> :confirm qall<CR>
 let g:clipboard = {
     \ 'name': 'wayland',
     \ 'copy': {
-        \ '+': 'wl-copy',
-        \ '*': 'wl-copy --primary',
+        \ '+': 'wl-copy --type text/plain',
+        \ '*': 'wl-copy --type text/plain --primary',
     \ },
     \ 'paste': {
-        \ '+': 'wl-paste --no-newline', 
-        \ '*': 'wl-paste --no-newline --primary',
+        \ '+': {-> systemlist('wl-paste --no-newline | tr -d "\r"')}, 
+        \ '*': {-> systemlist('wl-paste --no-newline --primary | tr -d "\r"')},
     \ },
 \ }
 
