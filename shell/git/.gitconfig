@@ -9,6 +9,7 @@
 [alias]
     code-changes = !git log --format=format: --name-only | rg -v '^$' | sort | uniq -c | sort -rg | head -10
     cc = !git code-changes
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [difftool "nvim-diff"]
     cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
 [diff]
