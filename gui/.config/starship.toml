@@ -12,3 +12,6 @@ symbol = " "
 
 [rust]
 symbol = " "
+
+[conda]
+disabled = true
