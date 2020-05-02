@@ -137,16 +137,16 @@ hi debugPC term=reverse guibg=#545167
 
 " Change cursor and add incremental commands
 if has('nvim')
-    " hi Cursor guifg=black guibg=green gui=reverse
     set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
     set inccommand=nosplit 
 end
 
 " Change highlight colors for coc
-hi CocErrorSign     guifg=#E06C75
-hi CocWarningSign   guifg=#E5C07B
-hi CocInfoSign      guifg=#61AFEF
-hi CocHintSign      guifg=#98C379
+hi CocErrorSign         guifg=#E06C75
+hi CocWarningSign       guifg=#E5C07B
+hi CocInfoSign          guifg=#61AFEF
+hi CocHintSign          guifg=#98C379
+hi CocRustChainingHint  guifg=#494360
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
