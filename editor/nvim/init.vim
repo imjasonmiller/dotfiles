@@ -356,8 +356,8 @@ let g:clipboard = {
         \ '*': 'wl-copy --type text/plain --primary',
     \ },
     \ 'paste': {
-        \ '+': {-> systemlist('wl-paste --no-newline | tr -d "\r"')}, 
-        \ '*': {-> systemlist('wl-paste --no-newline --primary | tr -d "\r"')},
+        \ '+': {-> systemlist('wl-paste | tr -d "\r"')}, 
+        \ '*': {-> systemlist('wl-paste --primary | tr -d "\r"')},
     \ },
 \ }
 
