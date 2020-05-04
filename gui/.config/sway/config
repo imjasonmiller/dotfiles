@@ -61,7 +61,7 @@ input type:keyboard {
     # Start your launcher
     # bindsym $mod+p exec rofi -show run
     bindsym $mod+p exec rofi -run-list-command ". ~/.bash_aliases" -run-command "/bin/bash -i -c '{cmd}'" -show run
-    bindsym $mod+c exec rofi -show calc -no-show-match
+    bindsym $mod+c exec rofi -show calc -no-show-match -calc-command "echo '{result}'" | wl-copy
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -142,6 +142,7 @@ input type:keyboard {
     for_window [window_role="bubble"] floating enable
     for_window [window_role="task_dialog"] floating enable
     for_window [window_role="dialog"] floating enable
+    for_window [title="Sudoku"] floating enable
     for_window [window_role="menu"] floating enable
     for_window [app_id="qt4-ssh-askpass"] floating enable
     for_window [class="Qt4-ssh-askpass"] floating enable
@@ -243,5 +244,8 @@ exec mako
 
 # Adjust screen colors based on surroundings
 exec redshift
+
+# See https://github.com/swaywm/sway/wiki/Systemd-integration
+exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
 include /etc/sway/config.d/*
