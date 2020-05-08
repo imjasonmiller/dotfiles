@@ -4,8 +4,11 @@ set shell=/bin/bash
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Theme
-" Plug 'joshdick/onedark.vim'           " one dark theme
-Plug 'atelierbram/Base2Tone-vim'        " base two tone theme
+" Plug 'joshdick/onedark.vim'             " one dark theme
+" Plug 'atelierbram/Base2Tone-vim'        " base two tone theme
+" Plug 'morhetz/gruvbox'                  " gruvbox theme
+Plug 'chriskempson/base16-vim'          " base16 theme
+Plug 'mike-hearn/base16-vim-lightline'  " base16 theme for lightline
 
 " Gui enhancements
 Plug 'itchyny/lightline.vim'            " improved status line
@@ -106,7 +109,7 @@ set tabstop=4                           " tab width of 4 spaces
 set expandtab                           " expand tabs to spaces
 
 " GUI settings
-colorscheme Base2Tone_EveningDark       " base two tone color scheme
+colorscheme base16-default-dark         " gruvbox color scheme
 syntax on                               " syntax highlighting
 set synmaxcol=500                       " no syntax highlight on long lines for perf.
 set ttyfast                             " indicate a fast terminal connection
@@ -157,10 +160,10 @@ let g:NERDCustomDelimiters = {
   \ 'typescript.tsx': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' }
   \ }
 
+    " \ 'colorscheme': 'base16-default-dark',
 " Lightline
 set noshowmode                          " hide insert status
 let g:lightline = {
-    \ 'colorscheme': 'Base2Tone_Evening',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
