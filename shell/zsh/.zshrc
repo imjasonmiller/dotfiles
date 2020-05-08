@@ -1,13 +1,14 @@
 #!/bin/bash
 export ZSH=$HOME/.oh-my-zsh
 
+export GPG_TTY=$(tty)
+
 # alias
 alias e="nvim"
-
 alias cat="bat"
-
 alias c="cargo"
-
+alias td="transmission-daemon"
+alias tr="transmission-remote"
 alias figma-linux="GDK_BACKEND=x11 figma-linux"
 
 # Take a note
@@ -16,9 +17,9 @@ alias note="nvim $(date +~/docs/notes/%Y/%Y-%m-%d.md)"
 # fuzzy finder
 FZF_DEFAULT_OPTS=
 FZF_DEFAULT_OPTS+=" --height 20%"
-FZF_DEFAULT_OPTS+=" --color=fg:#a4a1b5,bg:#2a2734,hl:#ffcc99"
-FZF_DEFAULT_OPTS+=" --color=fg+:#a4a1b5,bg+:#2a2734,hl+:#ffcc99"
-FZF_DEFAULT_OPTS+=" --color=info:#9a86fd,prompt:#ffcc99,pointer:#c678dd"
+FZF_DEFAULT_OPTS+=" --color=fg:#d8d8d8,bg:#181818,hl:#a1b56c"
+FZF_DEFAULT_OPTS+=" --color=fg+:#d8d8d8,bg+:#181818,hl+:#a1b56c"
+FZF_DEFAULT_OPTS+=" --color=info:#f7ca88,prompt:#ffcc99,pointer:#ab4642"
 FZF_DEFAULT_OPTS+=" --color=marker:#f8fafd,spinner:#9a86fd,header:#f3f4f6"
 FZF_DEFAULT_OPTS+=" --no-mouse --inline-info --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -300' --preview-window='right:hidden:wrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)'"
 export FZF_DEFAULT_OPTS
