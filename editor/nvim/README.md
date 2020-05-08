@@ -26,6 +26,3 @@ In normal and visual mode, the current or selected line(s) can be moved up or do
 **Comment and uncomment line(s)**  
 In normal and visual mode, the current or selected line(s) can be commented and uncommented with <kbd>leader</kbd> + <kbd>c</kbd> + <kbd>space</kbd>.
 
-## Preview
-![Screenshot of editor](./../../images/editor_nvim.jpg)
-
