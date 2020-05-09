@@ -43,7 +43,7 @@ man() {
 }
 
 # bat theme
-export BAT_THEME="TwoDark"
+export BAT_THEME="base16"
 
 # show hidden files for tab completion
 setopt globdots 
