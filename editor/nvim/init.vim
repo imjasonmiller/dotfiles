@@ -9,6 +9,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plug 'morhetz/gruvbox'                  " gruvbox theme
 Plug 'chriskempson/base16-vim'          " base16 theme
 Plug 'mike-hearn/base16-vim-lightline'  " base16 theme for lightline
+Plug 'imjasonmiller/vim-colors-github'  " github theme
 
 " Gui enhancements
 Plug 'itchyny/lightline.vim'            " improved status line
