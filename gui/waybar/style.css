@@ -132,6 +132,10 @@ label:focus {
     background-color: #90b1b1;
 }
 
+#custom-github {
+    background-color: transparent;
+}
+
 #network {
     background-color: transparent;
 }
