@@ -40,13 +40,9 @@
     },
 
     "custom/github": {
-        "format-icons": {
-            "default": " "
-        },
-        "format": "<span rise='3000'>{}</span> <span font='16'>{icon}</span>",
+        "format": "<span rise='3000'>{}</span> <span font='16'> </span>",
         "return-type": "json",
-        "max-length": "5",
-        "interval": 60,
+        "interval": 10,
         "exec": "$HOME/.config/waybar/github.sh",
         "tooltip": false,
         "on-click": "xdg-open https://github.com/notifications"
