@@ -4,12 +4,7 @@ set shell=/bin/bash
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Theme
-" Plug 'joshdick/onedark.vim'             " one dark theme
-" Plug 'atelierbram/Base2Tone-vim'        " base two tone theme
-" Plug 'morhetz/gruvbox'                  " gruvbox theme
-Plug 'chriskempson/base16-vim'          " base16 theme
-Plug 'mike-hearn/base16-vim-lightline'  " base16 theme for lightline
-Plug 'imjasonmiller/vim-colors-github'  " github theme
+Plug '~/work/2020/vim-colors-github'
 
 " Gui enhancements
 Plug 'itchyny/lightline.vim'            " improved status line
@@ -18,7 +13,6 @@ Plug 'machakann/vim-highlightedyank'    " highlight lines while yanking
 
 " Editor enhancements
 Plug 'editorconfig/editorconfig-vim'    " consistent code style across editors
-Plug 'scrooloose/nerdtree'              " file browser
 Plug 'tpope/vim-unimpaired'             " move lines of code around using alt+j/k
 Plug 'airblade/vim-rooter'              " set working directory to project root
 
@@ -40,7 +34,8 @@ Plug 'junegunn/fzf.vim'                 " fuzzy finder
 Plug 'godlygeek/tabular'                " align text
 
 " Syntactic language support
-Plug 'arzg/vim-rust-syntax-ext'         " rust
+Plug 'rust-lang/rust.vim'               " rust
+" Plug 'arzg/vim-rust-syntax-ext'         " rust extended
 Plug 'pangloss/vim-javascript'          " javascript
 Plug 'leafgarland/typescript-vim'       " typescript
 Plug 'maxmellon/vim-jsx-pretty'         " jsx for javascript and typescript
@@ -52,6 +47,9 @@ Plug 'lervag/vimtex'                    " latex
 Plug 'ron-rs/ron.vim'                   " rust object notation
 Plug 'cstrahan/vim-capnp'               " cap'n proto
 
+" Tools for plugin development
+Plug 'tpope/vim-scriptease'
+
 call plug#end()
 
 " Regular regular expressions
@@ -59,6 +57,7 @@ source ~/.config/nvim/regex.vim
 
 " Autocomplete and plugins
 let g:coc_global_extensions = [
+    \ 'coc-explorer',
     \ 'coc-tsserver',
     \ 'coc-css',
     \ 'coc-rust-analyzer',
@@ -85,11 +84,19 @@ set encoding=utf-8                      " enable utf-8 encoding
 set scrolloff=2                         " minimum lines to keep above and below cursor
 set hidden                              " do not unload buffer after switching 
 set mouse=a                             " enable mouse usage in terminal
+
+" Decent wildmenu
+set wildmenu
+set wildmode=list:longest
+set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+
+" Wrapping options
 set formatoptions=tc                    " wrap text and comments using textwidth
 set formatoptions+=r                    " continue comments on enter in insert mode
 set formatoptions+=q                    " enable formatting of comments with gq
 set formatoptions+=n                    " detect lists for formatting
 set formatoptions+=b                    " auto-wrap in insert mode, do not wrap old long lines
+set formatoptions-=o                    " do not insert comment leader on 'o' from normal mode 
 
 " Improve search
 set incsearch                           " show pattern matches
@@ -110,15 +117,24 @@ set tabstop=4                           " tab width of 4 spaces
 set expandtab                           " expand tabs to spaces
 
 " GUI settings
-colorscheme base16-default-dark         " gruvbox color scheme
+if (has("termguicolors"))
+    set termguicolors               " Use 24-bit colors in vim/neovim
+endif
+
+set termguicolors                                                                                                                                                                                         
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"                                                                                                                                                                    
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"  
+
+let g:github_colors_soft = 1
+let g:github_colors_extra_functions = 1
+
+colorscheme github-dark
 syntax on                               " syntax highlighting
 set synmaxcol=500                       " no syntax highlight on long lines for perf.
 set ttyfast                             " indicate a fast terminal connection
 set lazyredraw                          " reduce updates while not typing
 set laststatus=2                        " always show the status line
 set nofoldenable                        " disable code folding
-" set cursorline                          " highlight the current line
-set background=dark
 set shortmess+=c                        " suppress 'match x of y' messages
 set number relativenumber               " hybrid relative line numbers
 set colorcolumn=80                      " hightlight long lines
@@ -150,7 +166,7 @@ hi CocErrorSign         guifg=#E06C75
 hi CocWarningSign       guifg=#E5C07B
 hi CocInfoSign          guifg=#61AFEF
 hi CocHintSign          guifg=#98C379
-hi CocRustChainingHint  guifg=#494360
+hi CocRustChainingHint  guifg=#54595f
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -161,18 +177,73 @@ let g:NERDCustomDelimiters = {
   \ 'typescript.tsx': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' }
   \ }
 
-    " \ 'colorscheme': 'base16-default-dark',
 " Lightline
 set noshowmode                          " hide insert status
 let g:lightline = {
+    \ 'colorscheme': 'github_dark',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'coc_error', 'coc_warning', 'coc_hint', 'coc_info' ] ]
     \ },
     \ 'component_function': {
-    \   'gitbranch': 'gitbranch#name'
+    \   'gitbranch': 'gitbranch#name',
+    \   'cocstatus': 'coc#status'
     \ },
-    \ }
+    \ 'component_type': {
+    \   'coc_error'        : 'error',
+    \   'coc_warning'      : 'warning',
+    \   'coc_info'         : 'tabsel',
+    \   'coc_hint'         : 'middle',
+    \   'coc_fix'          : 'middle',
+    \ },
+    \ 'component_expand': {
+    \   'coc_error'        : 'LightlineCocErrors',
+    \   'coc_warning'      : 'LightlineCocWarnings',
+    \   'coc_info'         : 'LightlineCocInfos',
+    \   'coc_hint'         : 'LightlineCocHints',
+    \   'coc_fix'          : 'LightlineCocFixes',
+    \ },
+\ }
+
+" function! s:lightline_coc_diagnostic(kind, sign) abort
+  " let info = get(b:, 'coc_diagnostic_info', 0)
+  " " coc#util#get_config('diagnostic').warningSign
+  " if empty(info) || get(info, a:kind, 0) == 0
+    " return ''
+  " endif
+  " try
+    " let s = g:coc_user_config['diagnostic'][a:sign . 'Sign']
+  " catch
+    " let s = ''
+  " endtry
+  " return printf('%s %d', s, info[a:kind])
+" endfunction
+function! s:lightline_coc_diagnostic(kind, sign) abort
+    let info = get(b:, 'coc_diagnostic_info', 0)
+    if empty(info) || get(info, a:kind, 0) == 0
+        return ''
+    endif
+    return printf('%s %d', a:sign, info[a:kind])
+endfunction
+
+function! LightlineCocErrors() abort
+  return s:lightline_coc_diagnostic('error', '●')
+endfunction
+
+function! LightlineCocWarnings() abort
+  return s:lightline_coc_diagnostic('warning', '●')
+endfunction
+
+function! LightlineCocInfos() abort
+  return s:lightline_coc_diagnostic('information', '●')
+endfunction
+
+function! LightlineCocHints() abort
+  return s:lightline_coc_diagnostic('hints', '●')
+endfunction
+\ }
+
+autocmd User CocDiagnosticChange call lightline#update()
 
 " Search with ripgrep
 if executable('rg')
@@ -214,12 +285,6 @@ au! FileType fzf
 au  FileType fzf set laststatus=0 noshowmode noruler
   \| au BufLeave <buffer> set laststatus=2 showmode ruler
 
-" Use 24-bit colors in vim/neovim
-if (empty($TMUX))
-    if (has("termguicolors"))
-        set termguicolors
-    endif
-endif
 
 " Markdown options
 let g:vim_markdown_math = 1
@@ -270,6 +335,8 @@ nmap <leader>da :call TermDebugSendCommand('info args')<cr>
 
 " Toggle NERDtree
 nnoremap <leader>a :NERDTreeToggle<Cr>
+nnoremap <leader>pv :NERDTreeFind<CR>
+nmap <leader>e :CocCommand explorer<CR>
 
 " Search with ripgrep
 noremap <leader>s :Rg<Space>
@@ -287,7 +354,7 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
-" Toggle invisible characters
+" Toggle whitespace characters
 nnoremap <leader>t :set invlist<Cr>
 
 " Use `[c` and `]c` to navigate diagnostics
@@ -300,9 +367,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
-" Remap keys for coc gotos
+" Go-to's 
 nmap <silent> ga <Plug>(coc-codeaction)
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 
@@ -366,3 +434,4 @@ let g:clipboard = {
 \ }
 
 set clipboard=unnamedplus
+
