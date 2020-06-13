@@ -6,18 +6,22 @@
     autocrlf = input
     safecrlf = true
     editor = nvim
+	excludesfile = ~/.config/git/.gitignore
 [alias]
     code-changes = !git log --format=format: --name-only | rg -v '^$' | sort | uniq -c | sort -rg | head -10
     cc = !git code-changes
+[init]
+	templateDir = ~/.config/git/template/
 [difftool "nvim-diff"]
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
+[mergetool "nvim-merge"]
     cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
 [diff]
     tool = nvim-diff
-[mergetool "nvim-merge"]
-    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
 [merge]
     tool = nvim-merge
 [commit]
     gpgsign = true
 [protocol]
     version = 2
+
