@@ -40,34 +40,63 @@ font:
 
 draw_bold_text_with_bright_colors: true
 
+# colors:
+  # primary:
+    # background: '#181818'
+    # foreground: '#d8d8d8'
+
+  # cursor:
+    # text: '#d8d8d8'
+    # cursor: '#d8d8d8'
+
+  # normal:
+    # black:   '#181818'
+    # red:     '#ab4642'
+    # green:   '#a1b56c'
+    # yellow:  '#f7ca88'
+    # blue:    '#7cafc2'
+    # magenta: '#ba8baf'
+    # cyan:    '#86c1b9'
+    # white:   '#d8d8d8'
+
+  # bright:
+    # black:   '#585858'
+    # red:     '#ab4642'
+    # green:   '#a1b56c'
+    # yellow:  '#f7ca88'
+    # blue:    '#7cafc2'
+    # magenta: '#ba8baf'
+    # cyan:    '#86c1b9'
+    # white:   '#f8f8f8'
+
 colors:
   primary:
-    background: '#181818'
-    foreground: '#d8d8d8'
-
-  cursor:
-    text: '#d8d8d8'
-    cursor: '#d8d8d8'
+    background: '0x24292E'
+    foreground: '0xD1D5DA'
 
   normal:
-    black:   '#181818'
-    red:     '#ab4642'
-    green:   '#a1b56c'
-    yellow:  '#f7ca88'
-    blue:    '#7cafc2'
-    magenta: '#ba8baf'
-    cyan:    '#86c1b9'
-    white:   '#d8d8d8'
+    black:   '0x24292E'
+    red:     '0xFF8787'
+    blue:   '0x85E89D'
+    yellow:  '0xFFAB70'
+    green:    '0x79B8FF'
+    magenta: '0xB392F0'
+    cyan:    '0xFFAB70'
+    white:   '0xFAFBFC'
 
   bright:
-    black:   '#585858'
-    red:     '#ab4642'
-    green:   '#a1b56c'
-    yellow:  '#f7ca88'
-    blue:    '#7cafc2'
-    magenta: '#ba8baf'
-    cyan:    '#86c1b9'
-    white:   '#f8f8f8'
+    black:   '0x24292E'
+    red:     '0xFF8787'
+    green:   '0x79B8FF'
+    yellow:  '0xFFAB70'
+    blue:    '0x79B8FF'
+    magenta: '0xB392F0'
+    cyan:    '0xFFAB70'
+    white:   '0xFAFBFC'
+
+    text: '0x24292E'
+    cursor: '0xDBEDFF'
+
 # colors:
   # primary:
     # background: '0x2a2734'
@@ -96,7 +125,7 @@ colors:
     # text: '0x2a2734'
     # cursor: '0xb37537'
 
-  # indexed_colors: []
+  indexed_colors: []
 
 visual_bell:
   animation: EaseOutExpo
@@ -137,13 +166,9 @@ alt_send_esc: true
 
 debug:
   render_timer: false
-
   persistent_logging: false
-
   log_level: Warn
-
   print_events: false
-
   ref_test: false
 
 key_bindings:
