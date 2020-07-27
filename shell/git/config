@@ -12,6 +12,7 @@
     cc = !git code-changes
 [init]
 	templateDir = ~/.config/git/template/
+	defaultBranch = main
 [difftool "nvim-diff"]
     cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
 [mergetool "nvim-merge"]
