@@ -35,13 +35,13 @@ output $output1 {
 default_border none
 default_floating_border none
 
-# Add gaps
-# gaps inner 10
+# Disable focus on mouse over window
+focus_follows_mouse no
 
 ### Input configuration
 input type:keyboard {
     repeat_delay 150
-    repeat_rate 50
+    repeat_rate 15
 
     xkb_layout us,ru
     xkb_variant altgr-intl,
@@ -248,4 +248,5 @@ exec redshift
 # See https://github.com/swaywm/sway/wiki/Systemd-integration
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
-include /etc/sway/config.d/*
+# include /etc/sway/config.d/*
+# include /etc/sway/config
