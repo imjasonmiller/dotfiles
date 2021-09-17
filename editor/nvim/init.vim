@@ -1,393 +1,385 @@
-set shell=/bin/bash
+" --------------------------------------------
+" # Plugins
+" -------------------------------------------- 
 
-" Plugins
+" Use Plug as package manager
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Theme
-Plug '~/work/2020/vim-colors-github'
+  " Color schemes
+  Plug 'imjasonmiller/vim-colors-github-primer' 
+  Plug 'christianchiarulli/nvcode-color-schemes.vim'
+  Plug 'shinchu/lightline-gruvbox.vim'
 
-" Gui enhancements
-Plug 'itchyny/lightline.vim'            " improved status line
-Plug 'itchyny/vim-gitbranch'            " current git branch in status line
-Plug 'machakann/vim-highlightedyank'    " highlight lines while yanking
+  " User interface enhancements
+  Plug 'itchyny/lightline.vim'        " Improved status line
+  Plug 'itchyny/vim-gitbranch'        " Current git branch in status line
 
-" Editor enhancements
-Plug 'editorconfig/editorconfig-vim'    " consistent code style across editors
-Plug 'tpope/vim-unimpaired'             " move lines of code around using alt+j/k
-Plug 'airblade/vim-rooter'              " set working directory to project root
+  " Editor enhancements
+  Plug 'tpope/vim-unimpaired'         " Useful bracket mappings
+  Plug 'tpope/vim-commentary'         " Commenting using motions
+  Plug 'tpope/vim-surround'           " Ease working with parentheses and others
 
-" Semantic language support
-Plug 'airblade/vim-gitgutter'           " show git changes in the sign column
+  " Semantic language support
+  Plug 'neovim/nvim-lspconfig'        " Common configurations
+  Plug 'kabouzeid/nvim-lspinstall'    " Add :LspInstall <language> command
+  Plug 'hrsh7th/nvim-cmp'             " Completion framework
+  Plug 'hrsh7th/vim-vsnip'            " Snippet engine
 
-" Completion plugins
-Plug 'neoclide/coc.nvim', {
-    \ 'branch': 'release'
-    \ }                                 " intellisense engine for vim8/neovim
-Plug 'tpope/vim-surround'               " easily delete, change and add pairs.
-Plug 'jiangmiao/auto-pairs'             " auto close pairs
-Plug 'scrooloose/nerdcommenter'         " improve commenting of code
-Plug 'junegunn/fzf', {
-    \ 'dir': '~/.fzf',
-    \ 'do': './install --all'
-    \ }
-Plug 'junegunn/fzf.vim'                 " fuzzy finder
-Plug 'godlygeek/tabular'                " align text
+  " Improve highlighting
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" Syntactic language support
-Plug 'rust-lang/rust.vim'               " rust
-" Plug 'arzg/vim-rust-syntax-ext'         " rust extended
-Plug 'pangloss/vim-javascript'          " javascript
-Plug 'leafgarland/typescript-vim'       " typescript
-Plug 'maxmellon/vim-jsx-pretty'         " jsx for javascript and typescript
-Plug 'jparise/vim-graphql'              " graphql
-Plug 'StanAngeloff/php.vim'             " php
-Plug 'plasticboy/vim-markdown'          " markdown
-Plug 'cespare/vim-toml'                 " toml
-Plug 'lervag/vimtex'                    " latex
-Plug 'ron-rs/ron.vim'                   " rust object notation
-Plug 'cstrahan/vim-capnp'               " cap'n proto
+  " Completion sources for nvim-cmp
+  Plug 'hrsh7th/cmp-nvim-lsp'         
+  Plug 'hrsh7th/cmp-vsnip'            
+  Plug 'hrsh7th/cmp-path'             
+  Plug 'hrsh7th/cmp-buffer'
 
-" Tools for plugin development
-Plug 'tpope/vim-scriptease'
+  " Enable features of rust-analyzer, such as inlay hints and more
+  Plug 'simrat39/rust-tools.nvim'
+
+  " Extend interface for LSP
+  Plug 'glepnir/lspsaga.nvim'
+
+  " Syntactic language support
+  Plug 'plasticboy/vim-markdown'
+  Plug 'cespare/vim-toml' 
+  Plug 'stephpy/vim-yaml' 
+  Plug 'rust-lang/rust.vim'
+  Plug 'ron-rs/ron.vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'othree/html5.vim'
+  Plug 'yuezk/vim-js'
+  Plug 'cakebaker/scss-syntax.vim'
+  Plug 'posva/vim-vue'
+  Plug 'jparise/vim-graphql'
+  Plug 'lervag/vimtex'
+
+  " Fuzzy finder
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+
+  " Git decorations
+  Plug 'lewis6991/gitsigns.nvim'
 
 call plug#end()
 
-" Regular regular expressions
-source ~/.config/nvim/regex.vim
+" --------------------------------------------
+" # Editor settings
+" --------------------------------------------
 
-" Autocomplete and plugins
-let g:coc_global_extensions = [
-    \ 'coc-explorer',
-    \ 'coc-tsserver',
-    \ 'coc-css',
-    \ 'coc-rust-analyzer',
-    \ 'coc-eslint',
-    \ 'coc-prettier',
-    \ 'coc-vimtex'
-    \ ]
-
-set completeopt=noinsert,menuone,noselect
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Editor settings
-filetype plugin indent on               " file type detection
-set autoindent                          " auto-indent each line
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-set encoding=utf-8                      " enable utf-8 encoding
-set scrolloff=2                         " minimum lines to keep above and below cursor
-set hidden                              " do not unload buffer after switching 
-set mouse=a                             " enable mouse usage in terminal
-
-" Decent wildmenu
-set wildmenu
-set wildmode=list:longest
-set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
-
-" Wrapping options
-set formatoptions=tc                    " wrap text and comments using textwidth
-set formatoptions+=r                    " continue comments on enter in insert mode
-set formatoptions+=q                    " enable formatting of comments with gq
-set formatoptions+=n                    " detect lists for formatting
-set formatoptions+=b                    " auto-wrap in insert mode, do not wrap old long lines
-set formatoptions-=o                    " do not insert comment leader on 'o' from normal mode 
-
-" Improve search
-set incsearch                           " show pattern matches
-set ignorecase                          " ignore cases in term
-set smartcase                           " override ignorecase if term contains uppercase
-set gdefault                            " substitute all matches in a line
-
-" Spell check in LaTeX and Markdown
-set spelllang=nl,en_us
-au FileType tex,markdown,text setlocal spell
-
-" Rust code style guidelines
-au Filetype rust set colorcolumn=100
-
-" Default indentation
-set shiftwidth=4                        " spaces to auto-indent
-set tabstop=4                           " tab width of 4 spaces
-set expandtab                           " expand tabs to spaces
-
-" GUI settings
+" Enable true-color
 if (has("termguicolors"))
-    set termguicolors               " Use 24-bit colors in vim/neovim
+  " Allow true-color inside of tmux, see `:h xterm-true-color`
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+  set termguicolors
 endif
 
-set termguicolors                                                                                                                                                                                         
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"                                                                                                                                                                    
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"  
+syntax enable
 
-let g:github_colors_soft = 1
-let g:github_colors_extra_functions = 1
+" colorscheme github_primer_dark
+colorscheme gruvbox
 
-colorscheme github-dark
-syntax on                               " syntax highlighting
-set synmaxcol=500                       " no syntax highlight on long lines for perf.
-set ttyfast                             " indicate a fast terminal connection
-set lazyredraw                          " reduce updates while not typing
-set laststatus=2                        " always show the status line
-set nofoldenable                        " disable code folding
-set shortmess+=c                        " suppress 'match x of y' messages
-set number relativenumber               " hybrid relative line numbers
-set colorcolumn=80                      " hightlight long lines
+" Set default encoding to UTF-8, but allow for Simplified Chinese
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
-" Show and highlight invisible characters
-set nolist                              " hide by default, as they are toggled
-set listchars=""                        " characters that will be shown
-set listchars+=extends:»
-set listchars+=precedes:«
-set listchars+=nbsp:¬                   " non-breaking space
-set listchars+=trail:•                  " trailing whitespace
-hi WhiteSpace guifg=#C678DD             " purple color for characters
+" Indentation
+filetype plugin indent on           " Load plugin files for filetypes
+set shiftwidth=2                    " Auto-indentation of two spaces
+set tabstop=2                       " Tab width of two spaces
+set expandtab                       " Expand tabs to spaces
 
-" Debugger for Rust
-packadd! termdebug
-let g:termdebug_wide=1
-let g:termdebugger="rust-gdb"
-hi debugBreakpoint term=reverse guifg=#212734 guibg=#FFAD5C
-hi debugPC term=reverse guibg=#545167
+" Columns
+set signcolumn=yes                  " Always draw sign column to prevent the buffer from moving 
+set number relativenumber           " Relative line numbers
 
-" Change cursor and add incremental commands
-if has('nvim')
-    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-    set inccommand=nosplit 
-end
+" Performance
+set synmaxcol=500                   " Disable syntax highlighting on long lines
+set lazyredraw                      " Disable updates during non-typed commands such as macros
 
-" Change highlight colors for coc
-hi CocErrorSign         guifg=#E06C75
-hi CocWarningSign       guifg=#E5C07B
-hi CocInfoSign          guifg=#61AFEF
-hi CocHintSign          guifg=#98C379
-hi CocRustChainingHint  guifg=#54595f
+" Improve status line
+set laststatus=2                    " Always display the status line
+set shortmess+=c                    " Do not display ins-completion messages
 
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
+" Improve search
+set incsearch                       " Show search pattern matches
+set ignorecase                      " Ignore casing in searches
+set smartcase                       " Override ignorecase if pattern contains uppercase
+set gdefault                        " Substitute all matches on a line
 
-" React comment support for .tsx and .jsx files
-let g:NERDCustomDelimiters = {
-  \ 'javascript.jsx': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' },
-  \ 'typescript.tsx': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' }
-  \ }
+" Wrapping
+set formatoptions+=tc               " Wrap text and comments using textwidth
+set formatoptions-=o                " Do not insert comment leader on pressing 'o' or 'O' in normal mode
+set colorcolumn=80                  " Highlight long lines
 
-" Lightline
-set noshowmode                          " hide insert status
+set hidden                          " Do not unload a buffer when it is abandoned
+
+set mouse=a                         " Enable mouse usage for all modes
+
+set scrolloff=2                     " Minimum lines to keep above and below cursor
+
+" Completion
+set completeopt=noinsert,menuone,noselect
+set inccommand=nosplit              " Incremental updates while performing substition
+
+" Use the clipboard for all operations instead of using the `+` and/or `*` registers.
+set clipboard+=unnamedplus
+
+" Disable backups
+set nobackup
+set noswapfile
+set nowritebackup
+
+" --------------------------------------------
+" # Lightline
+" --------------------------------------------
+lua << EOF
+  require('gitsigns').setup()
+EOF
+
+function! LightlineGitbranch()
+    let branch = get(b:, 'gitsigns_head', '')
+    let status = get(b:, 'gitsigns_status', '')
+    if len(status) > 0
+        let status = " " . status
+    endif
+    return (winwidth(0) < 70 || branch == "") ? "" : " " . branch . status
+endfunction
+
+set noshowmode                      " Hide insert status
+    " \ 'colorscheme': 'github_primer_dark',
 let g:lightline = {
-    \ 'colorscheme': 'github_dark',
+    \ 'colorscheme': 'gruvbox',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'coc_error', 'coc_warning', 'coc_hint', 'coc_info' ] ]
     \ },
     \ 'component_function': {
-    \   'gitbranch': 'gitbranch#name',
-    \   'cocstatus': 'coc#status'
-    \ },
-    \ 'component_type': {
-    \   'coc_error'        : 'error',
-    \   'coc_warning'      : 'warning',
-    \   'coc_info'         : 'tabsel',
-    \   'coc_hint'         : 'middle',
-    \   'coc_fix'          : 'middle',
-    \ },
-    \ 'component_expand': {
-    \   'coc_error'        : 'LightlineCocErrors',
-    \   'coc_warning'      : 'LightlineCocWarnings',
-    \   'coc_info'         : 'LightlineCocInfos',
-    \   'coc_hint'         : 'LightlineCocHints',
-    \   'coc_fix'          : 'LightlineCocFixes',
+    \   'gitbranch': 'LightlineGitbranch',
     \ },
 \ }
 
-" function! s:lightline_coc_diagnostic(kind, sign) abort
-  " let info = get(b:, 'coc_diagnostic_info', 0)
-  " " coc#util#get_config('diagnostic').warningSign
-  " if empty(info) || get(info, a:kind, 0) == 0
-    " return ''
-  " endif
-  " try
-    " let s = g:coc_user_config['diagnostic'][a:sign . 'Sign']
-  " catch
-    " let s = ''
-  " endtry
-  " return printf('%s %d', s, info[a:kind])
-" endfunction
-function! s:lightline_coc_diagnostic(kind, sign) abort
-    let info = get(b:, 'coc_diagnostic_info', 0)
-    if empty(info) || get(info, a:kind, 0) == 0
-        return ''
-    endif
-    return printf('%s %d', a:sign, info[a:kind])
-endfunction
+" --------------------------------------------
+" # Completion
+" --------------------------------------------
+"  Change highlight colors within LSPSaga diagnostics
+hi DiagnosticHint         guifg=#586069
+hi DiagnosticError        guifg=#E06C75
+hi DiagnosticWarning 	    guifg=#E5C07B
+hi DiagnosticInformation  guifg=#61AFEF
+" Highlight colors for signs within column
+hi LspDiagnosticsSignHint         guifg=#586069
+hi LspDiagnosticsSignError        guifg=#E06C75
+hi LspDiagnosticsSignWarning      guifg=#E5C07B
+hi LspDiagnosticsSignInformation  guifg=#61AFEF
 
-function! LightlineCocErrors() abort
-  return s:lightline_coc_diagnostic('error', '●')
-endfunction
+lua << EOF
+-- Treesitter
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "rust", "javascript", "typescript", "html", "css", "scss", "vue" },
+  -- ignore_install = { "" },
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    -- disable = { "c", "rust" },  -- list of language that will be disabled
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 
-function! LightlineCocWarnings() abort
-  return s:lightline_coc_diagnostic('warning', '●')
-endfunction
+-- Disable the inlay diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false
+    }
+)
 
-function! LightlineCocInfos() abort
-  return s:lightline_coc_diagnostic('information', '●')
-endfunction
+local function install_servers()
+  local required_servers = { "css", "html", "typescript", "graphql", "vue", "tailwindcss" }
+  local installed_servers = require'lspinstall'.installed_servers()
 
-function! LightlineCocHints() abort
-  return s:lightline_coc_diagnostic('hints', '●')
-endfunction
-\ }
+  for _, server in pairs(required_servers) do
+    if not vim.tbl_contains(installed_servers, server) then
+      require'lspinstall'.install_server(server)
+    end
+  end
+end
 
-autocmd User CocDiagnosticChange call lightline#update()
+-- Config that activates keymaps and enables snippet support
+local function make_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-" Search with ripgrep
-if executable('rg')
-    set grepprg=rg\ --no-heading\ --vimgrep
-    set grepformat=%f:%l:%c:%m
-endif
+  return {
+    -- Enable snippet support
+    capabilities = capabilities,
+    -- Map buffer local keybindings when the language server attaches
+    on_attach = on_attach,
+  }
+end
 
-" Fuzzy finder
-let g:fzf_layout = { 'down': '~20%' }
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+local function setup_servers()
+  require'lspinstall'.setup()
 
-" Add preview for fzf
-command! -bang -nargs=? -complete=dir FzfFiles
-    \ call fzf#vim#files(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : {}, <bang>0)
+  local servers = require'lspinstall'.installed_servers()
 
-" Use ripgrep for fzf:
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
+  for i, server in pairs(servers) do
+    local config = make_config()
 
-" Hide fuzzy finder status line
-au! FileType fzf
-au  FileType fzf set laststatus=0 noshowmode noruler
-  \| au BufLeave <buffer> set laststatus=2 showmode ruler
+    -- Language server setup for Rust is handled by rust-tools 
+    if server == "rust" then goto continue end
 
+    require'lspconfig'[server].setup(config)
 
-" Markdown options
-let g:vim_markdown_math = 1
-let g:vim_markdown_toml_frontmatter = 1
+    ::continue::
+  end
+end
 
-" Treat .svelte files as html
-au! BufNewFile,BufRead *.svelte set ft=html
+install_servers()
+setup_servers()
 
-" Syntax highlight support for React with JavaScript or TypeScript 
-au! BufNewFile,BufRead *.jsx set ft=javascript.jsx
-au! BufNewFile,BufRead *.tsx set ft=typescript.tsx
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
 
-" Settings for vimtex
-let g:vimtex_view_method = 'zathura'
+-- The rust-tools plugin will configure and enable certain LSP features for us.
+-- See https://github.com/simrat39/rust-tools.nvim#configuration
+local nvim_lsp = require'lspconfig'
 
-" Avoid backups
-set nowritebackup
-set noswapfile
-set nobackup
+local opts = {
+    tools = { -- rust-tools options
+        autoSetHints = true,
+        hover_with_actions = true,
+        runnables = {
+          -- Whether to use a telescope for the selection menu
+          use_telescope = true,
+        },
+        inlay_hints = {
+            show_parameter_hints = false,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+        },
+    },
 
-" Keyboard shortcuts
-" Remap leader key to ,
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+    server = {
+        -- on_attach is a callback called when the language server attachs to the buffer
+        -- on_attach = on_attach,
+        settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+            ["rust-analyzer"] = {
+                -- enable clippy on save
+                checkOnSave = {
+                    command = "clippy"
+                },
+            }
+        }
+    },
+}
+
+require('rust-tools').setup(opts)
+
+-- Setup Completion
+-- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
+local cmp = require'cmp'
+cmp.setup({
+  -- Enable LSP snippets
+  snippet = {
+    expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<Tab>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    }),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
+  },
+  -- Installed sources
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'path' },
+    { name = 'buffer' },
+  },
+})
+
+local saga = require 'lspsaga'
+
+saga.init_lsp_saga {
+  -- error_sign = '●',
+  error_sign = '■',
+  warn_sign = '■',
+  hint_sign = '■',
+  infor_sign = '■',
+  code_action_prompt = {
+    sign = false
+  },
+}
+EOF
+
+" Set updatetime for CursorHold
+" 300ms of no cursor movement to trigger CursorHold
+set updatetime=300
+" Show diagnostic popup on cursor hold
+" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+
+" --------------------------------------------
+" # Autocommands
+" --------------------------------------------
+
+" Rust code style guidelines
+au Filetype rust set colorcolumn=100
+
+" Spell check in LaTeX and Markdown
+set spelllang=nl,en_us
+au FileType tex,markdown,text setlocal spell
+ 
+" Highlighted yank
+augroup highlight_yank
+  autocmd!
+  au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}
+augroup END
+
+" No line numbers in terminal mode
+au TermOpen * setlocal nonumber norelativenumber
+
+" --------------------------------------------
+" # Key mapping 
+" --------------------------------------------
+
+" Remap leader key to <space>
 let mapleader = "\<Space>"
 
-" Preserve selection when (de)indenting in visual mode
-vnoremap > >gv
-vnoremap < <gv
-
-" Do not hijack the Enter key
-inoremap <expr><Tab> (pumvisible() ? (empty(v:completed_item) ? "\<C-n>":"\<C-y>"):"\<Tab>")
-inoremap <expr><CR> (pumvisible() ? (empty(v:completed_item) ? "\<CR>\<CR>":"\<C-y>"):"\<CR>")
-
-" Debugging
-nmap <leader>dd :Termdebug<space>
-nmap <silent> <leader>dD :call TermDebugSendCommand('quit')<cr>:Gdb<cr>y<cr>
-nmap <leader>dr :Run<cr>
-nmap <leader>dR :Stop<cr>
-nmap <leader>db :Break<cr>
-nmap <leader>dB :Clear<cr>
-nmap <leader>ds :Step<cr>
-nmap <leader>dn :Over<cr>
-nmap <leader>df :Finish<cr>
-nmap <leader>dc :Continue<cr>
-nmap <leader>dp :Evaluate<cr>
-nmap <leader>de :Evaluate<space>
-nmap <leader>dl :call TermDebugSendCommand('info locals')<cr>
-nmap <leader>da :call TermDebugSendCommand('info args')<cr>
-
-" Toggle NERDtree
-nnoremap <leader>a :NERDTreeToggle<Cr>
-nnoremap <leader>pv :NERDTreeFind<CR>
-nmap <leader>e :CocCommand explorer<CR>
-
-" Search with ripgrep
-noremap <leader>s :Rg<Space>
-
-" Fuzzy finder
-nnoremap <silent> <leader>o :Files<CR>
-nnoremap <silent> <leader>O :Files!<CR>
-nnoremap <silent> <leader>` :Marks<CR>
-nmap <leader>; :Buffers<CR>
-
-" Align search result to middle of page
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-nnoremap <silent> * *zz
-nnoremap <silent> # #zz
-nnoremap <silent> g* g*zz
-
-" Toggle whitespace characters
-nnoremap <leader>t :set invlist<Cr>
-
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
-nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Go-to's 
-nmap <silent> ga <Plug>(coc-codeaction)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-
-" Switch between buffers using <leader>
-nnoremap <leader><leader> <C-^>
-
-" Left and right can switch buffers
-nnoremap <left> :bp<CR>
-nnoremap <right> :bn<CR>
-
-" Map Ctrl+c and Ctrl+j as Esc
+" Map <ctrl + c> and <ctrl + j> to <esc>
 inoremap <C-j> <Esc>
 vnoremap <C-j> <Esc>
 inoremap <C-c> <Esc>
 vnoremap <C-c> <Esc>
 
-" No arrow keys -- force yourself to use the home row
+" Disable arrow keys and force yourself to use the home row
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 inoremap <up> <nop>
@@ -395,43 +387,54 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-" Move single selected line
-nmap <A-j> ]e
-nmap <A-k> [e
-
-" Move multiple selected lines
-vmap <A-j> ]egv
-vmap <A-k> [egv
-
-" Improve hjkl-movement for soft wrapped rows
-" https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
-nnoremap <expr> j v:count ? 'j' : 'gj'
-nnoremap <expr> k v:count ? 'k' : 'gk'
-
 " Jump to start and end of line using the home row keys
 map H ^
 map L $
 
+" Switch between current and previous buffer using <leader>
+nnoremap <leader><leader> <C-^>
+
+" Switch buffers using <left> and <right>
+nnoremap <left> :bp<CR>
+nnoremap <right> :bn<CR>
+
+" Center search results
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+" Move a single selected line in normal mode using <alt + j> or <alt + k>
+nmap <A-j> ]e
+nmap <A-k> [e
+
+" Move multiple selected lines in visual mode using <alt + j> or <alt + k>
+vmap <A-j> ]egv
+vmap <A-k> [egv
+
 " Quick save
 nmap <leader>w :w<CR>
 
-" Correct previous spelling mistake
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+" Code navigation
+nnoremap <leader> rn    <cmd>lua require('lspsaga.rename').rename()<CR>
+nnoremap <silent> K     <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gs    <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+nnoremap <leader> D     <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <leader>a     <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+" nnoremap <leader>e     <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <leader>e     <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+nnoremap <silent> g[    <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> g]    <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 
-" Quit all
-noremap <C-q> :confirm qall<CR>
-
-let g:clipboard = {
-    \ 'name': 'wayland',
-    \ 'copy': {
-        \ '+': 'wl-copy --type text/plain',
-        \ '*': 'wl-copy --type text/plain --primary',
-    \ },
-    \ 'paste': {
-        \ '+': {-> systemlist('wl-paste | tr -d "\r"')}, 
-        \ '*': {-> systemlist('wl-paste --primary | tr -d "\r"')},
-    \ },
-\ }
-
-set clipboard=unnamedplus
-
+" Telescope
+nnoremap <leader>ff     <cmd>Telescope find_files<cr>
+nnoremap <leader>fg     <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb     <cmd>Telescope buffers<cr>
+nnoremap <leader>fh     <cmd>Telescope help_tags<cr>
