@@ -1,5 +1,6 @@
 [character]
-symbol = ""
+success_symbol = "[\u2570\u2500](dimmed) [](bold cyan)"
+error_symbol = "[\u2570\u2500](dimmed) [](bold red)"
 
 [hg_branch]
 symbol = " "
@@ -9,9 +10,13 @@ symbol = " "
 
 [package]
 symbol = " "
+style = "bold 3"
 
 [rust]
 symbol = " "
 
 [conda]
 disabled = true
+
+[directory]
+format = "[\u256D\u2500](dimmed) [$path]($style)[$read_only]($read_only_style) "
